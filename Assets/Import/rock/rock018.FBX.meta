@@ -6,10 +6,16 @@ ModelImporter:
     100000: //RootNode
     400000: //RootNode
     2100000: Felsen
+    2100002: color_palette
     2300000: //RootNode
     3300000: //RootNode
     4300000: rock_018
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Felsen
+    second: {fileID: 2100000, guid: 646e66202761a654fb3647bd0d8003ce, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
