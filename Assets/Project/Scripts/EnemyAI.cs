@@ -145,8 +145,7 @@ public class EnemyAI : MonoBehaviour
                     break;
             }
 
-            if (value != EnemyState.SLEEP)
-                m_Anim.SetBool("Sleep", false);
+
 
             m_LastState = m_State;
             m_State = value;

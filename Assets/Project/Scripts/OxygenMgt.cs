@@ -12,13 +12,14 @@ public class OxygenMgt : MonoBehaviour
     [SerializeField] private int m_MaxOxygen;
 
     public List<ParticleCollisionEvent> collisionEvents;
-    [SerializeField] private float m_OxygenDecreaseRate;
+    //[SerializeField] private float m_OxygenDecreaseRate;
     [SerializeField] private float m_OxygenIncreaseRate;
     [SerializeField] private float m_PassiveOxygenLossRate;
 
     [SerializeField] private float m_SurfaceY = -1f;
 
-
+    public delegate void OnOxygenExhaustedDel();
+    public static event OnOxygenExhaustedDel OnOxygenExhausted;
 
     public int CurrentOxygen
     {
@@ -69,9 +70,6 @@ public class OxygenMgt : MonoBehaviour
 
     private void SurfaceCheck()
     {
-
-
-
         if (transform.position.y < m_SurfaceY)
         {
             CancelInvoke("IncreaseOxygen");
@@ -85,8 +83,18 @@ public class OxygenMgt : MonoBehaviour
             InvokeRepeating("IncreaseOxygen", 1f / m_OxygenIncreaseRate, 1f / m_OxygenIncreaseRate);
         }
 
-        
-
+        if (CurrentOxygen <= 0)
+        {
+            CancelInvoke("PassiveOxygenLoss");
+            CurrentOxygen = 0;
+            if (OnOxygenExhausted != null)
+                OnOxygenExhausted();
+        }
+        else if (CurrentOxygen >= MaxOxygen)
+        {
+            CancelInvoke("IncreaseOxygen");
+            CurrentOxygen = MaxOxygen;
+        }
     }
 
     public void DecreaseOxygen(int value)
