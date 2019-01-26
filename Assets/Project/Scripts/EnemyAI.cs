@@ -20,7 +20,7 @@ public class EnemyAI : MonoBehaviour
     private Enemy m_Enemy;
     private const int m_ModeNb = 5;
 
-
+    [SerializeField] private int m_Damage;
 
     /* ----------------------------- */
 
@@ -604,11 +604,6 @@ public class EnemyAI : MonoBehaviour
 
     }
 
-    private void OnParticleCollision(GameObject other)
-    {
-        if (State == EnemyState.SLEEP && (other.tag == "FireSource" || other.tag == "FireSourceGreen") && other.transform.parent.tag == "Player")
-            FlipRotate();
-    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -618,10 +613,19 @@ public class EnemyAI : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Player player = collision.gameObject.GetComponent<Player>();
-        if(player != null)
+        OxygenMgt playerox = collision.gameObject.GetComponent<OxygenMgt>();
+        if(playerox != null)
         {
-            // TODO
+            playerox.DecreaseOxygen(m_Damage);
+        }
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        OxygenMgt playerox = collision.gameObject.GetComponent<OxygenMgt>();
+        if (playerox != null)
+        {
+            playerox.DecreaseOxygen(m_Damage);
         }
     }
 }
