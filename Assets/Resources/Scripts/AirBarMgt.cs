@@ -7,6 +7,7 @@ public class AirBarMgt : MonoBehaviour {
     [SerializeField] private RectTransform m_OxygenBarRect;
     [SerializeField] private int m_OxygenCur;
     [SerializeField] private int m_OxygenMax;
+    [SerializeField] private OxygenMgt m_OxMgt;
 
 
     //[SerializeField] private Sprite m_BarImageArray;
@@ -17,13 +18,26 @@ public class AirBarMgt : MonoBehaviour {
     {
         if (m_OxygenBarRect == null)
             Debug.LogError(this.name + " : m_OxygenBarRect no found");
+        m_OxMgt = FindObjectOfType<OxygenMgt>();
 
     }
 
     private void Update()
     {
+        m_OxMgt = FindObjectOfType<OxygenMgt>();
+        if (m_OxMgt == null)
+        {
 
-            SetOxygen(m_OxygenCur, m_OxygenMax);
+        }
+
+        if (m_OxMgt != null)
+        {
+            m_OxygenCur = m_OxMgt.CurrentOxygen;
+            m_OxygenMax = m_OxMgt.MaxOxygen;
+        }
+        else
+            Debug.Log(name + " : No OxMgt found");
+        SetOxygen(m_OxygenCur, m_OxygenMax);
         
     }
 
