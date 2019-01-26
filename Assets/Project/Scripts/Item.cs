@@ -9,4 +9,13 @@ public class Item : MonoBehaviour
     public float m_size = 1.0f;
     public float m_minDepth = 1.0f;
     public float m_maxDepth = 100.0f;
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Player player = collision.gameObject.GetComponent<Player>();
+        if (player != null)
+        {
+            // TODO
+        }
+    }
 }
