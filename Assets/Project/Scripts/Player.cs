@@ -66,8 +66,7 @@ public class Player : MonoBehaviour
             f.x = Mathf.Min(f.x, 0.025f);
         else if (f.x < 0f)
             f.x = Mathf.Max(f.x, -0.025f);
-        //Debug.Log(m_body.velocity.magnitude);
-
+ 
         Vector3 head = m_body.position + m_body.transform.up;
         if (head.y >= 0)
         {
@@ -76,16 +75,16 @@ public class Player : MonoBehaviour
         }
 
         m_body.AddForce(f, ForceMode.Impulse);
-        Vector3 direction = m_body.transform.position - transform.position;
-        m_body.AddForceAtPosition(f.normalized, head);
-        //m_body.AddForce(m_force, ForceMode.Impulse);
+        //Vector3 direction = m_body.transform.position - transform.position;
+        //m_body.AddForce(f, ForceMode.Impulse);
+        m_body.AddForce(m_force, ForceMode.Impulse);
+        Vector3 direction = f - m_body.transform.forward;
+        //Debug.Log(m_body.transform.forward + " " + m_body.transform.up);
+       // m_body.AddTorque(Vector3.forward * direction.magnitude * 0.1f, ForceMode.Impulse);
 
         float speed = m_body.velocity.magnitude;
         float speed2 = speed * speed;
         m_body.AddForce(-m_body.velocity.normalized * speed2 * 0.5f * Time.fixedDeltaTime, ForceMode.Impulse);
-
-      
-            
 
         m_force -= Vector3.one * Time.fixedDeltaTime; 
         m_force.x = Mathf.Max(0f, m_force.x);

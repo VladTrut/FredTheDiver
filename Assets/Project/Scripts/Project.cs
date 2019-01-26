@@ -7,6 +7,7 @@ public class Project : MonoBehaviour
     public GameObject m_segmentPrefab;
     public Camera m_cam;
     public Player m_player;
+    public float m_camDistance = 10.0f;
 
     private List<GameObject> m_world = new List<GameObject>();
     private GameObject m_currentSegment;
@@ -27,6 +28,11 @@ public class Project : MonoBehaviour
             if(m_world[m_world.Count-1] == m_currentSegment)
                 GenerateNextSegment();
         }
+    }
+
+    private void Update()
+    {
+        m_cam.transform.position = m_player.transform.position - Vector3.forward * m_camDistance;
     }
 
     void GenerateFirstSegment()
