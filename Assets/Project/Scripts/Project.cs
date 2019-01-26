@@ -8,10 +8,11 @@ public class Project : MonoBehaviour
     public Camera m_cam;
     public Player m_player;
     public float m_camDistance = 10.0f;
+    public float m_segmentSize = 50.0f;
 
     private List<GameObject> m_world = new List<GameObject>();
     private GameObject m_currentSegment;
-    private float m_segmentSize = 100.0f;
+    
 
     private void Start()
     {
