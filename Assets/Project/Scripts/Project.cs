@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Project : MonoBehaviour
 {
-    public GameObject m_segmentPrefab;
+    public GameObject [] m_segmentPrefab;
     public GameObject m_fishPrefab;
     public Camera m_cam;
     public Player m_player;
@@ -43,7 +43,10 @@ public class Project : MonoBehaviour
 
     void GenerateFirstSegment()
     {
-        GameObject b = Instantiate(m_segmentPrefab);
+        if (m_segmentPrefab.Length == 0)
+            return;
+
+        GameObject b = Instantiate(m_segmentPrefab[0]);
 
         // TODO 
 
@@ -53,7 +56,7 @@ public class Project : MonoBehaviour
 
     void GenerateNextSegment()
     {        
-        GameObject b = Instantiate(m_segmentPrefab, Vector3.zero, Quaternion.identity);
+        GameObject b = Instantiate(m_segmentPrefab[(int)Random.Range(1, m_segmentPrefab.Length)], Vector3.zero, Quaternion.identity);
         var pos = b.transform.position;
         pos.x += m_currentSegment.transform.position.x + m_segmentSize;
         b.transform.position = pos;
