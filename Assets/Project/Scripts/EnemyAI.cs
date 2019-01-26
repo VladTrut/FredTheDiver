@@ -92,6 +92,8 @@ public class EnemyAI : MonoBehaviour
     /* ----------------------------- */
     private bool m_ForceApplied = false;
     [SerializeField] private float m_ApplyForceDelay = 1f;
+    [SerializeField] private float m_DamageDelay = 1f;
+    private bool m_DamageTriggered;
 
 
 
@@ -611,21 +613,24 @@ public class EnemyAI : MonoBehaviour
             FlipRotate();
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        OxygenMgt playerox = collision.gameObject.GetComponent<OxygenMgt>();
-        if(playerox != null)
-        {
-            playerox.DecreaseOxygen(m_Damage);
-        }
-    }
+
+
 
     private void OnCollisionStay(Collision collision)
     {
         OxygenMgt playerox = collision.gameObject.GetComponent<OxygenMgt>();
         if (playerox != null)
-        {
-            playerox.DecreaseOxygen(m_Damage);
+        {   if (!m_DamageTriggered)
+            StartCoroutine(DecreaseOx(playerox, m_Damage));
+
         }
+    }
+
+    private IEnumerator DecreaseOx(OxygenMgt oxmgt, int value)
+    {
+        m_DamageTriggered = true;
+        oxmgt.DecreaseOxygen(m_Damage);
+        yield return new WaitForSeconds(m_DamageDelay);
+        m_DamageTriggered = false;
     }
 }

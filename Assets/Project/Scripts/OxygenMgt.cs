@@ -21,6 +21,9 @@ public class OxygenMgt : MonoBehaviour
     public delegate void OnOxygenExhaustedDel();
     public static event OnOxygenExhaustedDel OnOxygenExhausted;
 
+    public delegate void OnOxygenChangeDel(int value);
+    public static event OnOxygenChangeDel OnOxygenChange;
+
     public int CurrentOxygen
     {
         get
@@ -29,7 +32,10 @@ public class OxygenMgt : MonoBehaviour
         }
         set
         {
+            if (m_CurrentOxygen == value) return;
             m_CurrentOxygen = value;
+            if (OnOxygenChange != null)
+                OnOxygenChange(m_CurrentOxygen);
         }
     }
 
@@ -70,7 +76,7 @@ public class OxygenMgt : MonoBehaviour
 
     private void SurfaceCheck()
     {
-        if (transform.position.y < m_SurfaceY)
+        if (transform.position.y + transform.up.y < m_SurfaceY)
         {
             CancelInvoke("IncreaseOxygen");
             if (!IsInvoking("PassiveOxygenLoss"))
