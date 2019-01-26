@@ -1112,7 +1112,7 @@ GameObject:
   - component: {fileID: 374887190}
   m_Layer: 0
   m_Name: Fred_prefab
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1324,22 +1324,11 @@ PrefabInstance:
       propertyPath: ShapeModule.arc.mode
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 198866036663756580, guid: d7689380619fd894c8508730e2bed11f,
-        type: 3}
-      propertyPath: SubModule.subEmitters.Array.data[0].emitter
-      value: 
-      objectReference: {fileID: 198619258089343998}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d7689380619fd894c8508730e2bed11f, type: 3}
 --- !u!4 &4891050396375430 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4891049361556014, guid: d7689380619fd894c8508730e2bed11f,
-    type: 3}
-  m_PrefabInstance: {fileID: 1118968744}
-  m_PrefabAsset: {fileID: 0}
---- !u!198 &198619258089343998 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 198619259117867094, guid: d7689380619fd894c8508730e2bed11f,
     type: 3}
   m_PrefabInstance: {fileID: 1118968744}
   m_PrefabAsset: {fileID: 0}
