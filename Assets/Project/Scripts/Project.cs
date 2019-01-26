@@ -20,7 +20,7 @@ public class Project : MonoBehaviour
 
     private void FixedUpdate()
     {
-        m_player.ApplyForce(Vector3.up * 9.0f * Time.fixedDeltaTime);
+        m_player.ApplyForce(Vector3.up * 9.8f * Time.fixedDeltaTime);
 
         var dx = m_currentSegment.transform.position.x + m_segmentSize * 0.5f - m_player.transform.position.x;
         if(dx < m_segmentSize * 0.4f)

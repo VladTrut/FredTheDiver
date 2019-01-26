@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
     private string m_animLandIdle = "Land-Idle";
     private string m_animUnderwaterSwim = "Underwater-Swim";
     private PlayerState m_state = PlayerState.LandIdle;
+    private int m_direction = 1;
 
     private void Start()
     {
@@ -29,7 +30,7 @@ public class Player : MonoBehaviour
         Vector3 f = Vector3.zero;
         float step = 10.0f;
         bool isMoving = false;
-
+ 
         if (Input.GetKey(KeyCode.W))
         {
             f += step * Vector3.up * Time.deltaTime;
@@ -48,7 +49,7 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.D))
         {
             f -= step * Vector3.left * Time.deltaTime;
-            isMoving = true;            
+            isMoving = true;     
         }
 
         if(isMoving)
@@ -71,16 +72,53 @@ public class Player : MonoBehaviour
         if (head.y >= 0)
         {
             if (f.y > 0f)
-                f.y *= -1.0f;
+                f.y *= -10.0f;
         }
 
         m_body.AddForce(f, ForceMode.Impulse);
-        //Vector3 direction = m_body.transform.position - transform.position;
-        //m_body.AddForce(f, ForceMode.Impulse);
         m_body.AddForce(m_force, ForceMode.Impulse);
-        Vector3 direction = f - m_body.transform.forward;
-        //Debug.Log(m_body.transform.forward + " " + m_body.transform.up);
-       // m_body.AddTorque(Vector3.forward * direction.magnitude * 0.1f, ForceMode.Impulse);
+
+        float targetDir = Vector3.Dot(Vector3.right, f.normalized);
+
+        if(!isMoving)
+        {
+            float alpha2 = Vector3.Angle(m_body.transform.up, Vector3.up);
+            bool isUp = Vector3.Dot(-m_body.transform.forward, Vector3.up) >= 0.0f;
+            if (isUp)
+            {
+                if(m_direction == 1)
+                    m_body.AddTorque(Vector3.forward * alpha2 * 0.75f * Time.fixedDeltaTime * (isUp ? 1f : -1f), ForceMode.Force);
+                else if(m_direction == -1)
+                    m_body.AddTorque(Vector3.forward * alpha2 * 0.75f * Time.fixedDeltaTime * (isUp ? -1f : 1f), ForceMode.Force);
+            }
+        }
+        // right
+        else if (targetDir > 1e-2f || (targetDir >= -1e-2f && m_direction == 1))
+        {
+            m_direction = 1;
+            float alpha2 = Vector3.Angle(Vector3.right, m_body.transform.forward);
+            bool isRight = Vector3.Dot(Vector3.right, m_body.transform.right) >= 0.0f;
+            Vector3 r = Vector3.up * alpha2 * 0.75f * Time.fixedDeltaTime * (isRight ? 1f : -1f);
+            m_body.AddTorque(r, ForceMode.Force);
+
+            alpha2 = Vector3.Angle(m_body.transform.up, f);
+            bool isUp = Vector3.Dot(-m_body.transform.forward, f) >= 0.0f;
+            m_body.AddTorque(Vector3.forward * alpha2 * 0.75f * Time.fixedDeltaTime * (isUp ? 1f : -1f), ForceMode.Force);            
+        }
+        // left
+        else if(targetDir < -1e-2f || (targetDir <= 1e-2f && m_direction == -1))
+        {
+            m_direction = -1;
+            float alpha2 = Vector3.Angle(Vector3.left, m_body.transform.forward);
+            bool isLeft = Vector3.Dot(Vector3.left, m_body.transform.right) >= 0.0f;
+            Vector3 r = Vector3.up * alpha2 * 0.75f * Time.fixedDeltaTime * (isLeft ? 1f : -1f);
+            m_body.AddTorque(r, ForceMode.Force);
+
+            alpha2 = Vector3.Angle(m_body.transform.up, f);
+            bool isUp = Vector3.Dot(-m_body.transform.forward, f) >= 0.0f;
+            m_body.AddTorque(Vector3.forward * alpha2 * 0.75f * Time.fixedDeltaTime * (isUp ? -1f : 1f), ForceMode.Force);
+        }
+
 
         float speed = m_body.velocity.magnitude;
         float speed2 = speed * speed;
