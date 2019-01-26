@@ -82,7 +82,7 @@ public class OxygenMgt : MonoBehaviour
         {
 
             CancelInvoke("PassiveOxygenLoss");
-            InvokeRepeating("PassiveOxygenLoss", 1f / m_PassiveOxygenLossRate, 1f / m_PassiveOxygenLossRate);
+            InvokeRepeating("IncreaseOxygen", 1f / m_OxygenIncreaseRate, 1f / m_OxygenIncreaseRate);
         }
 
         
