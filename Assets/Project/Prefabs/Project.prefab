@@ -254,7 +254,7 @@ Light:
   serializedVersion: 8
   m_Type: 1
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 0.1
+  m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
   m_CookieSize: 10
@@ -379,8 +379,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2697512558375724346}
-  m_LocalRotation: {x: -0.0002664882, y: 0.58013666, z: 0.00019327592, w: 0.81451917}
-  m_LocalPosition: {x: -13.285654, y: 26.220516, z: -47.639866}
+  m_LocalRotation: {x: -0.07818351, y: 0.04216291, z: 0.0033130636, w: 0.99604154}
+  m_LocalPosition: {x: -7.1784735, y: 15.0290365, z: -72.523605}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2697512558454366649}
@@ -487,6 +487,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_segmentPrefab: {fileID: 3079408676955215905, guid: 66d67f5751201424ab7dee4e38ec3cf3,
+    type: 3}
+  m_fishPrefab: {fileID: 7430425718757180165, guid: c67ccfb646c5549f38e51b876d4015d9,
     type: 3}
   m_cam: {fileID: 1738106396}
   m_player: {fileID: 0}

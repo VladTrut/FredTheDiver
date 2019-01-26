@@ -8,6 +8,8 @@ public class Player : MonoBehaviour
 {
     public enum PlayerState {  LandIdle, UnderwaterIdle, UnderwaterSwim }
 
+    public float m_speed = 10.0f;
+
     private Rigidbody m_body;
     private Vector3 m_force;
     private Animator m_animator;
@@ -28,7 +30,7 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
         Vector3 f = Vector3.zero;
-        float step = 10.0f;
+        float step = m_speed;
         bool isMoving = false;
  
         if (Input.GetKey(KeyCode.W))
@@ -122,7 +124,7 @@ public class Player : MonoBehaviour
 
         float speed = m_body.velocity.magnitude;
         float speed2 = speed * speed;
-        m_body.AddForce(-m_body.velocity.normalized * speed2 * 0.5f * Time.fixedDeltaTime, ForceMode.Impulse);
+        m_body.AddForce(-m_body.velocity.normalized * speed2 * 0.25f * Time.fixedDeltaTime, ForceMode.Impulse);
 
         m_force -= Vector3.one * Time.fixedDeltaTime; 
         m_force.x = Mathf.Max(0f, m_force.x);
