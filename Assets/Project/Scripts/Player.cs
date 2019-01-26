@@ -3,35 +3,61 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Animator))]
 public class Player : MonoBehaviour
 {
+    public enum PlayerState {  LandIdle, UnderwaterIdle, UnderwaterSwim }
+
     private Rigidbody m_body;
     private Vector3 m_force;
+    private Animator m_animator;
+
+    private string m_animUnderwaterIdle = "Underwater-Idle";
+    private string m_animLandIdle = "Land-Idle";
+    private string m_animUnderwaterSwim = "Underwater-Swim";
+    private PlayerState m_state = PlayerState.LandIdle;
 
     private void Start()
     {
         m_body = GetComponent<Rigidbody>();
+        m_animator = GetComponent<Animator>();
+        SwitchState(PlayerState.UnderwaterIdle);
     }
 
     private void FixedUpdate()
     {
         Vector3 f = Vector3.zero;
         float step = 10.0f;
-        if(Input.GetKey(KeyCode.W))
+        bool isMoving = false;
+
+        if (Input.GetKey(KeyCode.W))
         {
-            f += step * Vector3.up * Time.deltaTime;            
+            f += step * Vector3.up * Time.deltaTime;
+            isMoving = true;
         }
         if (Input.GetKey(KeyCode.A))
         {
             f += step * Vector3.left * Time.deltaTime;
+            isMoving = true;
         }
         if (Input.GetKey(KeyCode.S))
         {
             f -= step * Vector3.up * Time.deltaTime;
+            isMoving = true;
         }
         if (Input.GetKey(KeyCode.D))
         {
             f -= step * Vector3.left * Time.deltaTime;
+            isMoving = true;            
+        }
+
+        if(isMoving)
+        {
+            SwitchState(PlayerState.UnderwaterSwim);
+        }
+        else
+        {
+            SwitchState(PlayerState.UnderwaterIdle);
         }
         
         if(f.y > 0f)
@@ -50,8 +76,9 @@ public class Player : MonoBehaviour
         }
 
         m_body.AddForce(f, ForceMode.Impulse);
-        //m_body.AddForceAtPosition(f, head, ForceMode.Impulse);
-        m_body.AddForce(m_force, ForceMode.Impulse);
+        Vector3 direction = m_body.transform.position - transform.position;
+        m_body.AddForceAtPosition(f.normalized, head);
+        //m_body.AddForce(m_force, ForceMode.Impulse);
 
         float speed = m_body.velocity.magnitude;
         float speed2 = speed * speed;
@@ -70,6 +97,26 @@ public class Player : MonoBehaviour
     {
         m_force = f;
     }
+
+    public void SwitchState(PlayerState state)
+    {
+        if (m_state == state)
+            return;
+        if (state == PlayerState.LandIdle)
+        {
+            m_animator.Play(m_animLandIdle);
+        }
+        else if (state == PlayerState.UnderwaterIdle)
+        {
+            m_animator.Play(m_animUnderwaterIdle);
+        }
+        else if (state == PlayerState.UnderwaterSwim)
+        {
+            m_animator.Play(m_animUnderwaterSwim);
+        }
+        m_state = state;
+    }
+
 }
 
 
