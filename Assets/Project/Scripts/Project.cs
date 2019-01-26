@@ -5,10 +5,15 @@ using UnityEngine;
 public class Project : MonoBehaviour
 {
     public GameObject m_segmentPrefab;
+    public GameObject m_fishPrefab;
     public Camera m_cam;
     public Player m_player;
     public float m_camDistance = 10.0f;
     public float m_segmentSize = 50.0f;
+    public float m_minFishSpawnHeight = -4.0f;
+    public float m_maxFishSpawnHeight = 17.0f;
+    public float m_minFishCount = 0;
+    public float m_maxFishCount = 2;
 
     private List<GameObject> m_world = new List<GameObject>();
     private GameObject m_currentSegment;
@@ -47,8 +52,7 @@ public class Project : MonoBehaviour
     }
 
     void GenerateNextSegment()
-    {
-        
+    {        
         GameObject b = Instantiate(m_segmentPrefab, Vector3.zero, Quaternion.identity);
         var pos = b.transform.position;
         pos.x += m_currentSegment.transform.position.x + m_segmentSize;
@@ -56,6 +60,8 @@ public class Project : MonoBehaviour
         GenerateTerrain(b);
         m_world.Add(b);
         m_currentSegment = b;
+
+
     }
 
     void GenerateTerrain(GameObject segment)

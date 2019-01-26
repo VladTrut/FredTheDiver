@@ -296,7 +296,7 @@ public class EnemyAI : MonoBehaviour
     {
         if (!m_ForceApplied)
             StartCoroutine(ApplyForce());
-        Debug.Log(GetComponent<Rigidbody>().velocity);
+        //Debug.Log(GetComponent<Rigidbody>().velocity);
         /*Rigidbody rb = GetComponent<Rigidbody>();
         if (rb.velocity.x > m_MaxSpeed)
             rb.velocity = new Vector3(m_MaxSpeed, rb.velocity.y, rb.velocity.z);
@@ -393,7 +393,7 @@ public class EnemyAI : MonoBehaviour
 
         if (m_Target.targettransform != null)
         {
-            Debug.Log(Vector3.Distance(m_Target.targettransform.position, m_DetectionTransform.position));
+            //Debug.Log(Vector3.Distance(m_Target.targettransform.position, m_DetectionTransform.position));
             if (Vector3.Distance(m_Target.targettransform.position, m_DetectionTransform.position) >= m_GiveUpDistance)
             {
                 SetTargetState(m_DetectionTransform, 0, EnemyState.GIVEUP);
@@ -615,5 +615,14 @@ public class EnemyAI : MonoBehaviour
     {
         if (State == EnemyState.SLEEP && collision.gameObject.tag == "Player")
             FlipRotate();
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Player player = collision.gameObject.GetComponent<Player>();
+        if(player != null)
+        {
+            // TODO
+        }
     }
 }
