@@ -23,11 +23,13 @@ public class TargetIndicator : MonoBehaviour
     public Font m_DistFont;
     public int m_DistTextSize;
     public float m_ArrowOffs;
+    public GameObject m_player;
+    [SerializeField] private GameObject m_UIOverlay;
 
     void Start()
     {
         mainCamera = Camera.main;
-        mainCanvas = FindObjectOfType<Canvas>();
+        mainCanvas = m_UIOverlay.GetComponent<Canvas>();
         Debug.Assert((mainCanvas != null), "There needs to be a Canvas object in the scene for the OTI to display");
         InstainateTargetIcon();
 
@@ -68,8 +70,9 @@ public class TargetIndicator : MonoBehaviour
 
             }
             m_ArrowText.transform.position = new Vector3(m_icon.transform.position.x, m_icon.transform.position.y - m_ArrowOffs, m_icon.transform.position.z);
-           
-            int boatdist = (int)Vector2.Distance(m_icon.position, screencoordinate);
+
+            //int boatdist = (int)Vector2.Distance(m_icon.position, screencoordinate);
+            int boatdist = (int)Vector3.Distance(transform.position, m_player.transform.position);
             m_ArrowText.text = boatdist.ToString() + " m";
 
 

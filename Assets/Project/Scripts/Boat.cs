@@ -28,4 +28,13 @@ public class Boat : MonoBehaviour
             m_step *= -1.0f;
         }
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Player player = collision.collider.gameObject.GetComponent<Player>();
+        if(player != null)
+        {
+            Debug.Log("TODO");
+        }
+    }
 }
