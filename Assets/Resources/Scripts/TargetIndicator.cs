@@ -47,6 +47,8 @@ public class TargetIndicator : MonoBehaviour
     private void UpdateSprite()
     {
         Vector3 newPos;
+        Vector3 screencoordinate = Camera.main.WorldToScreenPoint(transform.position);
+
         if (transform.position.x > mainCamera.pixelWidth || transform.position.x < 0 || transform.position.y > mainCamera.pixelHeight || transform.position.y < 0)
         {
 
@@ -66,38 +68,44 @@ public class TargetIndicator : MonoBehaviour
 
             }
             m_ArrowText.transform.position = new Vector3(m_icon.transform.position.x, m_icon.transform.position.y - m_ArrowOffs, m_icon.transform.position.z);
-            int boatdist = (int)Vector2.Distance(m_icon.position, transform.position);
+           
+            int boatdist = (int)Vector2.Distance(m_icon.position, screencoordinate);
+            Debug.Log("dist : " + boatdist);
             m_ArrowText.text = boatdist.ToString() + " m";
 
 
-            
+
 
 
             m_icon.transform.localScale = new Vector3(0.3f, 0.3f, 1);
-            Vector3 difference = transform.position - m_icon.transform.position;
+            Vector3 difference = screencoordinate - m_icon.transform.position;
             difference.Normalize();
             float rotZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
             m_icon.transform.rotation = Quaternion.Euler(0f, 0f, rotZ);
             m_ArrowText.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
 
-            m_iconImage.sprite = m_targetIconOffScreen;if (transform.position.x < 0 && transform.position.y < 0)
+            m_iconImage.sprite = m_targetIconOffScreen;
+
+
+
+            if (screencoordinate.x < 0 && screencoordinate.y < 0)
                 newPos = new Vector3(0 + offset, 0 + offset, m_icon.transform.position.z);
-            else if (transform.position.x < 0  && transform.position.y > mainCamera.pixelHeight)
+            else if (screencoordinate.x < 0  && screencoordinate.y > mainCamera.pixelHeight)
                 newPos = new Vector3(0 + offset, mainCamera.pixelHeight - offset, m_icon.transform.position.z);
-            else if (transform.position.x > mainCamera.pixelWidth && transform.position.y > mainCamera.pixelHeight)
+            else if (screencoordinate.x > mainCamera.pixelWidth && screencoordinate.y > mainCamera.pixelHeight)
                 newPos = new Vector3(mainCamera.pixelWidth - offset, mainCamera.pixelHeight - offset, m_icon.transform.position.z);
-            else if (transform.position.x > mainCamera.pixelWidth && transform.position.y < 0)
+            else if (screencoordinate.x > mainCamera.pixelWidth && screencoordinate.y < 0)
                 newPos = new Vector3(mainCamera.pixelWidth - offset, 0 + offset, m_icon.transform.position.z);
-            else if (transform.position.x > mainCamera.pixelWidth)
-                newPos = new Vector3(mainCamera.pixelWidth - offset, transform.position.y, m_icon.transform.position.z);
-            else if (transform.position.x < 0)
-                newPos = new Vector3(0 + offset, transform.position.y, m_icon.transform.position.z);
-            else if (transform.position.y > mainCamera.pixelHeight)
-                newPos = new Vector3(transform.position.x, mainCamera.pixelHeight - offset, m_icon.transform.position.z);
-            else if (transform.position.y < 0)
-                newPos = new Vector3(transform.position.x, 0 + offset, m_icon.transform.position.z);
+            else if (screencoordinate.x > mainCamera.pixelWidth)
+                newPos = new Vector3(mainCamera.pixelWidth - offset, screencoordinate.y, m_icon.transform.position.z);
+            else if (screencoordinate.x < 0)
+                newPos = new Vector3(0 + offset, screencoordinate.y, m_icon.transform.position.z);
+            else if (screencoordinate.y > mainCamera.pixelHeight)
+                newPos = new Vector3(screencoordinate.x, mainCamera.pixelHeight - offset, m_icon.transform.position.z);
+            else if (screencoordinate.y < 0)
+                newPos = new Vector3(screencoordinate.x, 0 + offset, m_icon.transform.position.z);
                 else
-                newPos = new Vector3(transform.position.x, transform.position.y, m_icon.transform.position.z);
+                newPos = new Vector3(screencoordinate.x, screencoordinate.y, m_icon.transform.position.z);
 
             m_icon.transform.position = newPos;
         }
