@@ -29,7 +29,7 @@ public class GetScore : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        m_Text.text = m_ScoreCounter.m_Score.ToString();
     }
 
     void FinalScore()
