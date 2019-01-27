@@ -254,7 +254,7 @@ Light:
   serializedVersion: 8
   m_Type: 1
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 0.3
+  m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
   m_CookieSize: 10
@@ -379,8 +379,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2697512558375724346}
-  m_LocalRotation: {x: -0.11973633, y: 0.21649045, z: 0.026758539, w: 0.96854484}
-  m_LocalPosition: {x: -80.26432, y: 25.959618, z: -192.78265}
+  m_LocalRotation: {x: -0.037990544, y: -0.071885094, z: 0.0027406402, w: -0.9966854}
+  m_LocalPosition: {x: -18.759321, y: 23.475967, z: -46.67288}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2697512558454366649}
@@ -493,9 +493,14 @@ MonoBehaviour:
   - {fileID: 1844573327282895487, guid: e8f75d97ab4b27d4aa7741afd76cbd3a, type: 3}
   - {fileID: 8362124251379035238, guid: 38031e9307decb048baa85986acba046, type: 3}
   - {fileID: 2463853934295568181, guid: 5596115004ec3774abf8c6a9c8911443, type: 3}
+  m_itemPrefab:
+  - {fileID: 1661058508896577587, guid: 56f6206b33df0bb418b472bd7d7d3543, type: 3}
+  - {fileID: 3494204327821242189, guid: 11e37a1805bab694a9ccb2611457b0e6, type: 3}
+  - {fileID: 4798967334818287630, guid: 86e4c08beb8025e459929d457cdb17cb, type: 3}
+  m_itemSpawnProbability: 0.8
   m_cam: {fileID: 1738106396}
   m_player: {fileID: 0}
-  m_camDistance: 7
+  m_camDistance: 9
   m_segmentSize: 50
 --- !u!1 &2697512559354691867
 GameObject:

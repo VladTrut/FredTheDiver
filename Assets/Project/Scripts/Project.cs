@@ -15,7 +15,7 @@ public class Project : MonoBehaviour
 
     private List<GameObject> m_world = new List<GameObject>();
     private GameObject m_currentSegment;
-    private bool m_GameStarted;
+    private bool m_GameStarted = false;
 
     public bool GameStarted { get => m_GameStarted; set => m_GameStarted = value; }
 
