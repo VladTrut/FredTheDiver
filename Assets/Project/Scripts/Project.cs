@@ -42,7 +42,7 @@ public class Project : MonoBehaviour
         m_cam.transform.position = m_player.transform.position - Vector3.forward * m_camDistance;
     }
 
-    void GenerateFirstSegment()
+    public void GenerateFirstSegment()
     {
         if (m_segmentPrefab.Length == 0)
             return;
