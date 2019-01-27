@@ -254,7 +254,7 @@ Light:
   serializedVersion: 8
   m_Type: 1
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 1
+  m_Intensity: 0.3
   m_Range: 10
   m_SpotAngle: 30
   m_CookieSize: 10
@@ -305,8 +305,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2697512558351001668}
-  m_LocalRotation: {x: -0.119592644, y: 0.81535834, z: 0.18174686, w: 0.5365227}
-  m_LocalPosition: {x: 2.1936607, y: 2.6806762, z: -53.59761}
+  m_LocalRotation: {x: -0, y: 0.000000059604645, z: -0, w: 1}
+  m_LocalPosition: {x: 0.60690105, y: 2.14, z: -45}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2697512558454366649}
@@ -379,8 +379,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2697512558375724346}
-  m_LocalRotation: {x: -0.29051584, y: 0.14849712, z: 0.04569124, w: 0.9441724}
-  m_LocalPosition: {x: -73.28646, y: -15.135705, z: -129.23894}
+  m_LocalRotation: {x: -0.11973633, y: 0.21649045, z: 0.026758539, w: 0.96854484}
+  m_LocalPosition: {x: -80.26432, y: 25.959618, z: -192.78265}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2697512558454366649}
@@ -491,16 +491,12 @@ MonoBehaviour:
   - {fileID: 6764555736048082510, guid: 49cc6003222562842b43606919d8ffff, type: 3}
   - {fileID: 3605053035728545181, guid: ed85253aac9be2944afc4b7c4039d20b, type: 3}
   - {fileID: 1844573327282895487, guid: e8f75d97ab4b27d4aa7741afd76cbd3a, type: 3}
-  m_fishPrefab: {fileID: 7430425718757180165, guid: c67ccfb646c5549f38e51b876d4015d9,
-    type: 3}
+  - {fileID: 8362124251379035238, guid: 38031e9307decb048baa85986acba046, type: 3}
+  - {fileID: 2463853934295568181, guid: 5596115004ec3774abf8c6a9c8911443, type: 3}
   m_cam: {fileID: 1738106396}
   m_player: {fileID: 0}
   m_camDistance: 7
   m_segmentSize: 50
-  m_minFishSpawnHeight: -4
-  m_maxFishSpawnHeight: 17
-  m_minFishCount: 0
-  m_maxFishCount: 2
 --- !u!1 &2697512559354691867
 GameObject:
   m_ObjectHideFlags: 0
