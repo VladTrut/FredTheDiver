@@ -4,9 +4,18 @@ using UnityEngine;
 
 public class Boat : MonoBehaviour
 {
+    public float m_maxSafeDistance = 100.0f;
+    public float m_speed = 1.0f;
     public float m_range = 0.15f;
+
     private float m_step = -1.0f;
     private float m_value = 0.0f;
+    private Rigidbody m_body;
+
+    private void Awake()
+    {
+        //m_body = GetComponent<Rigidbody>();
+    }
 
     void Update()
     {
@@ -27,6 +36,14 @@ public class Boat : MonoBehaviour
             m_value -= ds;
             m_step *= -1.0f;
         }
+    }
+
+    private void FixedUpdate()
+    {
+        //m_body.AddForce(transform.forward * m_speed * Time.fixedDeltaTime, ForceMode.Impulse);
+        var pos = transform.position;
+        pos += Vector3.right * m_speed * Time.fixedDeltaTime;
+        transform.position = pos;
     }
 
     private void OnCollisionEnter(Collision collision)
