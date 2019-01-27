@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class OxygenMgt : MonoBehaviour
 {
-
+    public static OxygenMgt instance;
 
     [SerializeField] private AirBarMgt m_AirBarUI;
     private bool m_SwimMode = false;
@@ -42,7 +42,10 @@ public class OxygenMgt : MonoBehaviour
     public int MaxOxygen { get => m_MaxOxygen; set => m_MaxOxygen = value; }
 
 
-
+    private void Awake()
+    {
+        instance = this;
+    }
 
 
     // Use this for initialization
@@ -119,5 +122,8 @@ public class OxygenMgt : MonoBehaviour
          CurrentOxygen -= 1;
     }
 
-
+    public void Reset()
+    {
+        CurrentOxygen = MaxOxygen;
+    }
 }

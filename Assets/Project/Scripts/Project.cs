@@ -10,14 +10,27 @@ public class Project : MonoBehaviour
 
     public Camera m_cam;
     public Player m_player;
+    public GameObject m_boat;
     public float m_camDistance = 10.0f;
     public float m_segmentSize = 50.0f;
 
     private List<GameObject> m_world = new List<GameObject>();
     private GameObject m_currentSegment;
     private bool m_GameStarted = false;
+    private Vector3 m_playerPos;
+    private Quaternion m_playerRot;
+    private Vector3 m_boatPos;
+    private Quaternion m_boatRot;
 
     public bool GameStarted { get => m_GameStarted; set => m_GameStarted = value; }
+
+    private void Awake()
+    {
+        m_playerPos = m_player.transform.position;
+        m_playerRot = m_player.transform.rotation;
+        m_boatPos = m_boat.transform.position;
+        m_boatRot = m_boat.transform.rotation;
+    }
 
     private void Start()
     {
@@ -27,6 +40,8 @@ public class Project : MonoBehaviour
     private void FixedUpdate()
     {
         if (!m_GameStarted) return;
+        if (m_currentSegment == null)
+            return;
 
         m_player.ApplyForce(Vector3.up * 9.8f * Time.fixedDeltaTime);
 
@@ -95,14 +110,28 @@ public class Project : MonoBehaviour
     public void Init()
     {
         m_GameStarted = true;
-
-        // TODO
+        m_player.transform.position = m_playerPos;
+        m_player.transform.rotation = m_playerRot;
+        m_boat.transform.position = m_boatPos;
+        m_boat.transform.rotation = m_boatRot;
+        foreach (var l in m_world)
+            DestroyImmediate(l);
+        m_world.Clear();
+        m_player.Reset();
+        GenerateFirstSegment();
     }
 
     public void GameOver()
     {
         m_GameStarted = false;
-
-        // TODO
+        m_player.transform.position = m_playerPos;
+        m_player.transform.rotation = m_playerRot;
+        m_boat.transform.position = m_boatPos;
+        m_boat.transform.rotation = m_boatRot;
+        foreach (var l in m_world)
+            DestroyImmediate(l);
+        m_world.Clear();
+        //m_player.Reset();
+        m_currentSegment = null;
     }
 }

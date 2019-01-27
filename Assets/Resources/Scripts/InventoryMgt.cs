@@ -91,11 +91,11 @@ public class InventoryMgt : MonoBehaviour
 
     }
 
-    public void IncreaseItemType(InventoryMgt.ItemType type)
+    public void IncreaseItemType(InventoryMgt.ItemType type, int weight)
     {
         m_ObjectQuantity[(int)type] += 1;
         m_ObjectArray[(int)type].GetComponentInChildren<Text>().text = m_ObjectQuantity[(int)type].ToString();
-
+        WeightCounter.instance.IncreaseWeight(weight);
     }
 
 
@@ -124,8 +124,26 @@ public class InventoryMgt : MonoBehaviour
 
     }
 
-    void GiveAllBack()
+    public void GiveAllBack(int value)
     {
+        for (int i = 0; i < m_ObjectArray.Length; i++)
+        {
+            m_ObjectQuantity[i] = 0;
+            m_ObjectArray[(int)i].GetComponentInChildren<Text>().text = m_ObjectQuantity[i].ToString();
+
+        }
+
+        ScoreCounter.instance.IncreaseScore(value);
+        WeightCounter.instance.ResetWeight();
+    }
+
+    public void Reset()
+    {
+        if (m_ObjectArray == null)
+            return;
+
+        ScoreCounter.instance.ResetScore();
+        WeightCounter.instance.ResetWeight();
         for (int i = 0; i < m_ObjectArray.Length; i++)
         {
             m_ObjectQuantity[i] = 0;

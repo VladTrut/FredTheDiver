@@ -21,7 +21,7 @@ public class Item : MonoBehaviour
             return;
 
         float d = Vector3.Distance(transform.position, Player.instance.transform.position);
-        if(d < 2.0f)
+        if(d < 3.0f)
         {
             gameObject.SetActive(false);
             Player.instance.Collect(this);

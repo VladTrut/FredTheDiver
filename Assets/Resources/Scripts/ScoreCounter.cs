@@ -3,9 +3,14 @@ using UnityEngine.UI;
 
 public class ScoreCounter : MonoBehaviour
 {
-
+    public static ScoreCounter instance;
     [SerializeField] private Text m_CoinText;
     public int m_Score;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     // Use this for initialization
     void Start()
@@ -25,4 +30,8 @@ public class ScoreCounter : MonoBehaviour
         m_Score += value;
     }
 
+    public void ResetScore()
+    {
+        m_Score = 0;
+    }
 }

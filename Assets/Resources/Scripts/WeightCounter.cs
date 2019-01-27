@@ -5,9 +5,16 @@ using UnityEngine.UI;
 
 public class WeightCounter : MonoBehaviour
 {
+    public static WeightCounter instance;
+
     [SerializeField] private Text m_WeightText;
     private int m_Weight;
     [SerializeField] private int m_WeightLimit;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     // Use this for initialization
     void Start()
@@ -24,5 +31,10 @@ public class WeightCounter : MonoBehaviour
     public void IncreaseWeight(int value)
     {
         m_Weight += value;
+    }
+
+    public void ResetWeight()
+    {
+        m_Weight = 0;
     }
 }

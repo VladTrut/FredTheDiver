@@ -58,9 +58,8 @@ public class MenuMgt : MonoBehaviour
 
     public void StartGame()
     {
+        m_Project.Init();
         ActivateGame(true);
-        m_Project.GenerateFirstSegment();
-
     }
 
     public void Credits()
@@ -76,14 +75,14 @@ public class MenuMgt : MonoBehaviour
         m_Player.SetActive(state);
         m_Boat.SetActive(state);
 
-        if (state == false)
+        /*if (state == false)
         {
             GameObject[] lvls =  GameObject.FindGameObjectsWithTag("Level");
             for (int i = 0; i < lvls.Length; i++)
             {
                 Destroy(lvls[i]);
             }
-        }
+        }*/
     }
 
 
@@ -94,7 +93,7 @@ public class MenuMgt : MonoBehaviour
         ActivateGame(false);
         m_MenuCanvas.SetActive(false);
         m_EndCanvas.SetActive(true);
-
+        m_Project.GameOver();
     }
 
 

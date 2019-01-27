@@ -24,6 +24,7 @@ public class Player : MonoBehaviour
     private List<Item> m_items = new List<Item>();
     private float m_itemsWeight = 0;
     private float m_itemsMaxWeight = 100;
+    private float m_itemsValue = 0;
 
     private void Awake()
     {
@@ -181,9 +182,27 @@ public class Player : MonoBehaviour
 
         m_items.Add(item);
         m_itemsWeight = w;
-        InventoryMgt.instance.IncreaseItemType(item.Type);
+        m_itemsValue += item.Value;
+        InventoryMgt.instance.IncreaseItemType(item.Type, (int)item.Weight);
 
         return true;
+    }
+
+    public void GiveAllBack()
+    {
+        InventoryMgt.instance.GiveAllBack((int)m_itemsValue);
+        m_items.Clear();
+        m_itemsWeight = 0.0f;
+        m_itemsValue = 0.0f;
+    }
+
+    public void Reset()
+    {
+        InventoryMgt.instance.Reset();
+        OxygenMgt.instance.Reset();
+        m_items.Clear();
+        m_itemsWeight = 0.0f;
+        m_itemsValue = 0.0f;
     }
 }
 
