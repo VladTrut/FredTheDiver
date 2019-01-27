@@ -618,12 +618,17 @@ public class EnemyAI : MonoBehaviour
 
     private void OnCollisionStay(Collision collision)
     {
-        OxygenMgt playerox = collision.gameObject.GetComponent<OxygenMgt>();
-        if (playerox != null)
-        {   if (!m_DamageTriggered)
-            StartCoroutine(DecreaseOx(playerox, m_Damage));
+        if (collision.gameObject.tag == "Player")
+        {
+            OxygenMgt playerox = collision.gameObject.GetComponent<OxygenMgt>();
+            if (playerox != null)
+            {
+                if (!m_DamageTriggered)
+                    StartCoroutine(DecreaseOx(playerox, m_Damage));
 
+            }
         }
+
     }
 
     private IEnumerator DecreaseOx(OxygenMgt oxmgt, int value)
