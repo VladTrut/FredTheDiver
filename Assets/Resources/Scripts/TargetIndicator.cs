@@ -70,7 +70,6 @@ public class TargetIndicator : MonoBehaviour
             m_ArrowText.transform.position = new Vector3(m_icon.transform.position.x, m_icon.transform.position.y - m_ArrowOffs, m_icon.transform.position.z);
            
             int boatdist = (int)Vector2.Distance(m_icon.position, screencoordinate);
-            Debug.Log("dist : " + boatdist);
             m_ArrowText.text = boatdist.ToString() + " m";
 
 
