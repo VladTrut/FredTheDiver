@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 781328314}
   - component: {fileID: 781328313}
   - component: {fileID: 781328312}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -136,10 +136,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: LowPolySchiff
       objectReference: {fileID: 0}
-    - target: {fileID: 2300000, guid: d5bb9b1e517fb40418eee7da18019a8e, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 646e66202761a654fb3647bd0d8003ce, type: 2}
     - target: {fileID: 400000, guid: d5bb9b1e517fb40418eee7da18019a8e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 50.4
@@ -196,6 +192,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: d5bb9b1e517fb40418eee7da18019a8e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 646e66202761a654fb3647bd0d8003ce, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d5bb9b1e517fb40418eee7da18019a8e, type: 3}
 --- !u!1 &2675411604526095957 stripped
