@@ -15,15 +15,19 @@ public class Project : MonoBehaviour
 
     private List<GameObject> m_world = new List<GameObject>();
     private GameObject m_currentSegment;
-    
+    private bool m_GameStarted;
+
+    public bool GameStarted { get => m_GameStarted; set => m_GameStarted = value; }
 
     private void Start()
     {
-        GenerateFirstSegment();
+        //GenerateFirstSegment();
     }
 
     private void FixedUpdate()
     {
+        if (!m_GameStarted) return;
+
         m_player.ApplyForce(Vector3.up * 9.8f * Time.fixedDeltaTime);
 
         var dx = m_currentSegment.transform.position.x + m_segmentSize * 0.5f - m_player.transform.position.x;
@@ -36,11 +40,15 @@ public class Project : MonoBehaviour
 
     private void Update()
     {
+        if (!m_GameStarted) return;
+
         m_cam.transform.position = m_player.transform.position - Vector3.forward * m_camDistance;
     }
 
-    void GenerateFirstSegment()
+    public void GenerateFirstSegment()
     {
+        if (!m_GameStarted) return;
+
         if (m_segmentPrefab.Length == 0)
             return;
 
@@ -53,7 +61,9 @@ public class Project : MonoBehaviour
     }
 
     void GenerateNextSegment()
-    {        
+    {
+        if (!m_GameStarted) return;
+
         GameObject b = Instantiate(m_segmentPrefab[(int)Random.Range(1, m_segmentPrefab.Length)], Vector3.zero, Quaternion.identity);
         var pos = b.transform.position;
         pos.x += m_currentSegment.transform.position.x + m_segmentSize;

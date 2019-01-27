@@ -24,11 +24,12 @@ public class TargetIndicator : MonoBehaviour
     public int m_DistTextSize;
     public float m_ArrowOffs;
     public GameObject m_player;
+    [SerializeField] private GameObject m_UIOverlay;
 
     void Start()
     {
         mainCamera = Camera.main;
-        mainCanvas = FindObjectOfType<Canvas>();
+        mainCanvas = m_UIOverlay.GetComponent<Canvas>();
         Debug.Assert((mainCanvas != null), "There needs to be a Canvas object in the scene for the OTI to display");
         InstainateTargetIcon();
 
