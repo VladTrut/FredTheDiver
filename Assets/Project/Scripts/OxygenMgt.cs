@@ -16,7 +16,7 @@ public class OxygenMgt : MonoBehaviour
     [SerializeField] private float m_OxygenIncreaseRate;
     [SerializeField] private float m_PassiveOxygenLossRate;
 
-    [SerializeField] private float m_SurfaceY = -1f;
+    [SerializeField] private float m_SurfaceY = 0f;
 
     public delegate void OnOxygenExhaustedDel();
     public static event OnOxygenExhaustedDel OnOxygenExhausted;
