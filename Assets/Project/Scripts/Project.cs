@@ -5,17 +5,14 @@ using UnityEngine;
 public class Project : MonoBehaviour
 {
     public GameObject [] m_segmentPrefab;
-   // public GameObject m_fishPrefab;
+    public GameObject[] m_itemPrefab;
+    public float m_itemSpawnProbability = 0.8f;
+
     public Camera m_cam;
     public Player m_player;
     public float m_camDistance = 10.0f;
     public float m_segmentSize = 50.0f;
-    /*
-    public float m_minFishSpawnHeight = -4.0f;
-    public float m_maxFishSpawnHeight = 17.0f;
-    public float m_minFishCount = 0;
-    public float m_maxFishCount = 2;
-    */
+
     private List<GameObject> m_world = new List<GameObject>();
     private GameObject m_currentSegment;
     
@@ -49,7 +46,7 @@ public class Project : MonoBehaviour
 
         GameObject b = Instantiate(m_segmentPrefab[0]);
 
-        // TODO 
+        GenerateItems(b);
 
         m_world.Add(b);
         m_currentSegment = b;
@@ -61,10 +58,27 @@ public class Project : MonoBehaviour
         var pos = b.transform.position;
         pos.x += m_currentSegment.transform.position.x + m_segmentSize;
         b.transform.position = pos;
-       
+        GenerateItems(b);
         m_world.Add(b);
-        m_currentSegment = b;
+        m_currentSegment = b;        
+    }
 
+    void GenerateItems(GameObject level)
+    {
+        if (m_itemPrefab.Length == 0)
+            return;
 
+        var points = level.GetComponentsInChildren<ItemSpawnPoint>();
+        if(points != null)
+        {
+            for(int i=0; i<points.Length; i++)
+            {
+                if (Random.value >= m_itemSpawnProbability)
+                    continue;
+
+                int index = Random.Range(0, m_itemPrefab.Length - 1);
+                Instantiate(m_itemPrefab[index], points[i].transform);
+            }
+        }
     }
 }

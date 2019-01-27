@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class InventoryMgt : MonoBehaviour
 {
+    public static InventoryMgt instance;
 
     [System.Serializable]
     public class Item
@@ -23,7 +24,6 @@ public class InventoryMgt : MonoBehaviour
     [SerializeField] private GameObject m_ItemPrefab;
     public float screenoffset;
     public float coeff;
-
 
     // Start is called before the first frame update
     void Start()
@@ -65,13 +65,13 @@ public class InventoryMgt : MonoBehaviour
 
     private void Awake()
     {
-
+        instance = this;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyUp(KeyCode.U))
+       /* if (Input.GetKeyUp(KeyCode.U))
         {
 
             IncreaseItemType(ItemType.COIN);
@@ -87,7 +87,7 @@ public class InventoryMgt : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.P))
         {
             GiveAllBack();
-        }
+        }*/
 
     }
 

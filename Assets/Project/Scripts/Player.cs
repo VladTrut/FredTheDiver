@@ -7,6 +7,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public enum PlayerState {  LandIdle, UnderwaterIdle, UnderwaterSwim }
+    public static Player instance;
 
     public float m_speed = 10.0f;
 
@@ -19,6 +20,15 @@ public class Player : MonoBehaviour
     private string m_animUnderwaterSwim = "Underwater-Swim";
     private PlayerState m_state = PlayerState.LandIdle;
     private int m_direction = 1;
+
+    private List<Item> m_items = new List<Item>();
+    private float m_itemsWeight = 0;
+    private float m_itemsMaxWeight = 100;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     private void Start()
     {
@@ -161,6 +171,19 @@ public class Player : MonoBehaviour
         var o2 = GetComponent<OxygenMgt>();
         if(o2 != null)
             o2.CurrentOxygen = Mathf.Min(o2.CurrentOxygen + 10, o2.MaxOxygen);
+    }
+
+    public bool Collect(Item item)
+    {
+        float w = m_itemsWeight + item.Weight;
+        if (w > m_itemsMaxWeight)
+            return false;
+
+        m_items.Add(item);
+        m_itemsWeight = w;
+        InventoryMgt.instance.IncreaseItemType(item.Type);
+
+        return true;
     }
 }
 
