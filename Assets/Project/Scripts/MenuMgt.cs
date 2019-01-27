@@ -31,6 +31,7 @@ public class MenuMgt : MonoBehaviour
         m_MenuCanvas.SetActive(true);
         m_Player.SetActive(false);
         m_Boat.SetActive(false);
+        m_Project.GameStarted = false;
     }
 
     // Update is called once per frame
@@ -58,8 +59,10 @@ public class MenuMgt : MonoBehaviour
 
     public void StartGame()
     {
+        m_Project.Init();
         ActivateGame(true);
-        m_Project.GenerateFirstSegment();
+
+
 
     }
 
@@ -71,26 +74,19 @@ public class MenuMgt : MonoBehaviour
     void ActivateGame(bool state)
     {
         m_UIOverlay.SetActive(state);
-        m_Project.GameStarted = state;
+
         m_MenuCanvas.SetActive(!state);
         m_Player.SetActive(state);
         m_Boat.SetActive(state);
-
-        if (state == false)
-        {
-            GameObject[] lvls =  GameObject.FindGameObjectsWithTag("Level");
-            for (int i = 0; i < lvls.Length; i++)
-            {
-                Destroy(lvls[i]);
-            }
-        }
     }
 
 
 
     void GameOver()
     {
+  
         m_gameover = true;
+        m_Project.GameOver();
         ActivateGame(false);
         m_MenuCanvas.SetActive(false);
         m_EndCanvas.SetActive(true);
