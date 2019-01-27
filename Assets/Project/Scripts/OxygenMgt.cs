@@ -12,13 +12,17 @@ public class OxygenMgt : MonoBehaviour
     [SerializeField] private int m_MaxOxygen;
 
     public List<ParticleCollisionEvent> collisionEvents;
-    [SerializeField] private float m_OxygenDecreaseRate;
+    //[SerializeField] private float m_OxygenDecreaseRate;
     [SerializeField] private float m_OxygenIncreaseRate;
     [SerializeField] private float m_PassiveOxygenLossRate;
 
     [SerializeField] private float m_SurfaceY = -1f;
 
+    public delegate void OnOxygenExhaustedDel();
+    public static event OnOxygenExhaustedDel OnOxygenExhausted;
 
+    public delegate void OnOxygenChangeDel(int value);
+    public static event OnOxygenChangeDel OnOxygenChange;
 
     public int CurrentOxygen
     {
@@ -28,7 +32,10 @@ public class OxygenMgt : MonoBehaviour
         }
         set
         {
+            if (m_CurrentOxygen == value) return;
             m_CurrentOxygen = value;
+            if (OnOxygenChange != null)
+                OnOxygenChange(m_CurrentOxygen);
         }
     }
 
@@ -69,24 +76,32 @@ public class OxygenMgt : MonoBehaviour
 
     private void SurfaceCheck()
     {
-
-
-
-        if (transform.position.y < m_SurfaceY)
+        if (transform.position.y + transform.up.y < m_SurfaceY)
         {
             CancelInvoke("IncreaseOxygen");
             if (!IsInvoking("PassiveOxygenLoss"))
                 InvokeRepeating("PassiveOxygenLoss", 1f / m_PassiveOxygenLossRate, 1f / m_PassiveOxygenLossRate);
+
         }
         else
         {
 
             CancelInvoke("PassiveOxygenLoss");
-            InvokeRepeating("PassiveOxygenLoss", 1f / m_PassiveOxygenLossRate, 1f / m_PassiveOxygenLossRate);
+            InvokeRepeating("IncreaseOxygen", 1f / m_OxygenIncreaseRate, 1f / m_OxygenIncreaseRate);
         }
 
-        
-
+        if (CurrentOxygen <= 0)
+        {
+            CancelInvoke("PassiveOxygenLoss");
+            CurrentOxygen = 0;
+            if (OnOxygenExhausted != null)
+                OnOxygenExhausted();
+        }
+        else if (CurrentOxygen >= MaxOxygen)
+        {
+            CancelInvoke("IncreaseOxygen");
+            CurrentOxygen = MaxOxygen;
+        }
     }
 
     public void DecreaseOxygen(int value)

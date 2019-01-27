@@ -134,8 +134,8 @@ MonoBehaviour:
   m_AirBarUI: {fileID: 6062784888835640122}
   m_CurrentOxygen: 0
   m_MaxOxygen: 100
-  m_OxygenDecreaseRate: 2
-  m_OxygenIncreaseRate: 2
+  m_OxygenDecreaseRate: 10
+  m_OxygenIncreaseRate: 10
   m_PassiveOxygenLossRate: 1
   m_SurfaceY: -1
 --- !u!1001 &357773303

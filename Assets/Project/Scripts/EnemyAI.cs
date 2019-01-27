@@ -20,7 +20,7 @@ public class EnemyAI : MonoBehaviour
     private Enemy m_Enemy;
     private const int m_ModeNb = 5;
 
-
+    [SerializeField] private int m_Damage;
 
     /* ----------------------------- */
 
@@ -92,6 +92,8 @@ public class EnemyAI : MonoBehaviour
     /* ----------------------------- */
     private bool m_ForceApplied = false;
     [SerializeField] private float m_ApplyForceDelay = 1f;
+    [SerializeField] private float m_DamageDelay = 1f;
+    private bool m_DamageTriggered;
 
 
 
@@ -145,8 +147,7 @@ public class EnemyAI : MonoBehaviour
                     break;
             }
 
-            if (value != EnemyState.SLEEP)
-                m_Anim.SetBool("Sleep", false);
+
 
             m_LastState = m_State;
             m_State = value;
@@ -605,11 +606,6 @@ public class EnemyAI : MonoBehaviour
 
     }
 
-    private void OnParticleCollision(GameObject other)
-    {
-        if (State == EnemyState.SLEEP && (other.tag == "FireSource" || other.tag == "FireSourceGreen") && other.transform.parent.tag == "Player")
-            FlipRotate();
-    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -617,12 +613,24 @@ public class EnemyAI : MonoBehaviour
             FlipRotate();
     }
 
-    private void OnCollisionEnter(Collision collision)
+
+
+
+    private void OnCollisionStay(Collision collision)
     {
-        Player player = collision.gameObject.GetComponent<Player>();
-        if(player != null)
-        {
-            // TODO
+        OxygenMgt playerox = collision.gameObject.GetComponent<OxygenMgt>();
+        if (playerox != null)
+        {   if (!m_DamageTriggered)
+            StartCoroutine(DecreaseOx(playerox, m_Damage));
+
         }
+    }
+
+    private IEnumerator DecreaseOx(OxygenMgt oxmgt, int value)
+    {
+        m_DamageTriggered = true;
+        oxmgt.DecreaseOxygen(m_Damage);
+        yield return new WaitForSeconds(m_DamageDelay);
+        m_DamageTriggered = false;
     }
 }
