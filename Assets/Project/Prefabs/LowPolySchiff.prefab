@@ -119,7 +119,7 @@ MonoBehaviour:
   m_targetIconOffScreen: {fileID: 21300000, guid: 3c627e8766f154056a0e1bae43d2c237,
     type: 3}
   m_edgeBuffer: 0
-  m_targetIconScale: {x: 0, y: 0, z: 0}
+  m_targetIconScale: {x: 1, y: 1, z: 1}
   ShowDebugLines: 0
   offset: 15
   m_DistFont: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
@@ -136,6 +136,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LowPolySchiff
       objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: d5bb9b1e517fb40418eee7da18019a8e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 646e66202761a654fb3647bd0d8003ce, type: 2}
     - target: {fileID: 400000, guid: d5bb9b1e517fb40418eee7da18019a8e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 50.4
@@ -192,10 +196,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2300000, guid: d5bb9b1e517fb40418eee7da18019a8e, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 646e66202761a654fb3647bd0d8003ce, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d5bb9b1e517fb40418eee7da18019a8e, type: 3}
 --- !u!1 &2675411604526095957 stripped

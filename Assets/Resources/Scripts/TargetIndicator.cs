@@ -23,6 +23,7 @@ public class TargetIndicator : MonoBehaviour
     public Font m_DistFont;
     public int m_DistTextSize;
     public float m_ArrowOffs;
+    public GameObject m_player;
 
     void Start()
     {
@@ -68,8 +69,9 @@ public class TargetIndicator : MonoBehaviour
 
             }
             m_ArrowText.transform.position = new Vector3(m_icon.transform.position.x, m_icon.transform.position.y - m_ArrowOffs, m_icon.transform.position.z);
-           
-            int boatdist = (int)Vector2.Distance(m_icon.position, screencoordinate);
+
+            //int boatdist = (int)Vector2.Distance(m_icon.position, screencoordinate);
+            int boatdist = (int)Vector3.Distance(transform.position, m_player.transform.position);
             m_ArrowText.text = boatdist.ToString() + " m";
 
 
