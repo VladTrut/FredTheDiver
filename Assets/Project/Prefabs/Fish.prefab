@@ -246,7 +246,7 @@ MonoBehaviour:
   m_strength: 1
   m_minSpawnTime: 3
   m_maxSpawnTime: 7
-  m_spawnProbability: 0.75
+  m_spawnProbability: 0.5
   m_fish: {fileID: 2631282792710128867}
 --- !u!1 &7430425719554841701
 GameObject:
