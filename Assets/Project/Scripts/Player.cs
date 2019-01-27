@@ -156,6 +156,12 @@ public class Player : MonoBehaviour
         m_state = state;
     }
 
+    private void OnParticleCollision(GameObject other)
+    {
+        var o2 = GetComponent<OxygenMgt>();
+        if(o2 != null)
+            o2.CurrentOxygen = Mathf.Min(o2.CurrentOxygen + 10, o2.MaxOxygen);
+    }
 }
 
 
