@@ -618,6 +618,8 @@ public class EnemyAI : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
+            OxygenMgt playerox = collision.gameObject.GetComponent<OxygenMgt>(); 
+            if (playerox != null) { playerox.DecreaseOxygen(m_Damage); }
             Destroy(gameObject);
         }
 

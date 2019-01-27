@@ -91,4 +91,18 @@ public class Project : MonoBehaviour
             }
         }
     }
+
+    public void Init()
+    {
+        m_GameStarted = true;
+
+        // TODO
+    }
+
+    public void GameOver()
+    {
+        m_GameStarted = false;
+
+        // TODO
+    }
 }
