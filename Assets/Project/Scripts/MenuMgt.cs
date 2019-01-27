@@ -59,9 +59,9 @@ public class MenuMgt : MonoBehaviour
 
     public void StartGame()
     {
-        m_Project.GameStarted = true;
-        ActivateGame(true);
         m_Project.Init();
+        ActivateGame(true);
+
 
 
     }
@@ -84,7 +84,7 @@ public class MenuMgt : MonoBehaviour
 
     void GameOver()
     {
-        m_Project.GameStarted = false;
+  
         m_gameover = true;
         m_Project.GameOver();
         ActivateGame(false);
