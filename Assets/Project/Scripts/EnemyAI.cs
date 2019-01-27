@@ -119,7 +119,7 @@ public class EnemyAI : MonoBehaviour
                 case EnemyState.TARGET:
                     //m_AiLerpScript.canMove = m_CanMoveInTargetMode;
                     //m_AiLerpScript.speed = m_TargetSpeed;
-
+                    
                     m_DetectionTransform.position = transform.position;
                     m_Anim.SetBool("Attack", true);
                     break;

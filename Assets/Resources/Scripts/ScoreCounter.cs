@@ -5,7 +5,7 @@ public class ScoreCounter : MonoBehaviour
 {
 
     [SerializeField] private Text m_CoinText;
-    private int m_Score;
+    public int m_Score;
 
     // Use this for initialization
     void Start()
