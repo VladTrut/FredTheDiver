@@ -197,7 +197,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0.1497541}
-  m_AnchoredPosition: {x: 0, y: 0.19995117}
+  m_AnchoredPosition: {x: 0, y: 10}
   m_SizeDelta: {x: 0, y: -1.5}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!223 &3860212640052775773
@@ -573,6 +573,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_CoinText: {fileID: 3860212641281335461}
+  m_Score: 0
 --- !u!1 &3860212641148287069
 GameObject:
   m_ObjectHideFlags: 0
