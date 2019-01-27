@@ -1110,6 +1110,7 @@ GameObject:
   - component: {fileID: 374887191}
   - component: {fileID: 374887192}
   - component: {fileID: 374887190}
+  - component: {fileID: 293305257}
   m_Layer: 0
   m_Name: Fred_prefab
   m_TagString: Player
@@ -1196,6 +1197,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac553c59185e50249ba2d9d1804ee848, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_speed: 10
+--- !u!114 &293305257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1725988634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4794c88b133c041ce8a2a935ccec7cbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AirBarUI: {fileID: 0}
+  m_CurrentOxygen: 0
+  m_MaxOxygen: 100
+  m_OxygenIncreaseRate: 10
+  m_PassiveOxygenLossRate: 1
+  m_SurfaceY: -1
 --- !u!1 &1981324283
 GameObject:
   m_ObjectHideFlags: 0
