@@ -16,20 +16,23 @@ public class Project : MonoBehaviour
 
     private List<GameObject> m_world = new List<GameObject>();
     private GameObject m_currentSegment;
-    private bool m_GameStarted = false;
+    //private bool m_GameStarted = false;
     private Vector3 m_playerPos;
     private Quaternion m_playerRot;
     private Vector3 m_boatPos;
-    private Quaternion m_boatRot;
+    private Quaternion m_boatRotation;
+    private List<GameObject> m_items = new List<GameObject>();
 
-    public bool GameStarted { get => m_GameStarted; set => m_GameStarted = value; }
+
+    //public bool GameStarted { get => m_GameStarted; set => m_GameStarted = value; }
 
     private void Awake()
     {
         m_playerPos = m_player.transform.position;
         m_playerRot = m_player.transform.rotation;
         m_boatPos = m_boat.transform.position;
-        m_boatRot = m_boat.transform.rotation;
+        m_boatRotation = m_boat.transform.rotation;
+        enabled = false;
     }
 
     private void Start()
@@ -39,11 +42,12 @@ public class Project : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!m_GameStarted) return;
+        //if (!m_GameStarted) return;
         if (m_currentSegment == null)
             return;
 
-        m_player.ApplyForce(Vector3.up * 9.8f * Time.fixedDeltaTime);
+        if(m_player.transform.position.y < -1.0f)
+            m_player.ApplyForce(Vector3.up * 9.8f * Time.fixedDeltaTime);
 
         var dx = m_currentSegment.transform.position.x + m_segmentSize * 0.5f - m_player.transform.position.x;
         if(dx < m_segmentSize * 0.4f)
@@ -55,14 +59,14 @@ public class Project : MonoBehaviour
 
     private void Update()
     {
-        if (!m_GameStarted) return;
+        //if (!m_GameStarted) return;
 
         m_cam.transform.position = m_player.transform.position - Vector3.forward * m_camDistance;
     }
 
     public void GenerateFirstSegment()
     {
-        if (!m_GameStarted) return;
+        //if (!m_GameStarted) return;
 
         if (m_segmentPrefab.Length == 0)
             return;
@@ -77,7 +81,7 @@ public class Project : MonoBehaviour
 
     void GenerateNextSegment()
     {
-        if (!m_GameStarted) return;
+        //if (!m_GameStarted) return;
 
         GameObject b = Instantiate(m_segmentPrefab[(int)Random.Range(1, m_segmentPrefab.Length)], Vector3.zero, Quaternion.identity);
         var pos = b.transform.position;
@@ -101,37 +105,46 @@ public class Project : MonoBehaviour
                 if (Random.value >= m_itemSpawnProbability)
                     continue;
 
-                int index = Random.Range(0, m_itemPrefab.Length - 1);
-                Instantiate(m_itemPrefab[index], points[i].transform);
+                int index = Random.Range(0, m_itemPrefab.Length);
+                points[i].transform.localRotation = Quaternion.identity;
+                points[i].transform.rotation = Quaternion.identity;
+                
+                var item = Instantiate(m_itemPrefab[index], points[i].transform);
+                m_items.Add(item);
             }
         }
     }
 
     public void Init()
     {
-        m_GameStarted = true;
+        //m_GameStarted = true;
         m_player.transform.position = m_playerPos;
         m_player.transform.rotation = m_playerRot;
         m_boat.transform.position = m_boatPos;
-        m_boat.transform.rotation = m_boatRot;
-        foreach (var l in m_world)
-            DestroyImmediate(l);
-        m_world.Clear();
+        m_boat.transform.rotation = m_boatRotation;
         m_player.Reset();
         GenerateFirstSegment();
+        enabled = true;
     }
 
     public void GameOver()
     {
-        m_GameStarted = false;
+        enabled = false;
+        //m_GameStarted = false;
         m_player.transform.position = m_playerPos;
         m_player.transform.rotation = m_playerRot;
         m_boat.transform.position = m_boatPos;
-        m_boat.transform.rotation = m_boatRot;
+        m_boat.transform.rotation = m_boatRotation;
         foreach (var l in m_world)
             DestroyImmediate(l);
         m_world.Clear();
-        //m_player.Reset();
         m_currentSegment = null;
+        foreach (var i in m_items)
+            DestroyImmediate(i);
+        m_items.Clear();
+
+        AudioManager.instance.StopSound("EnvironmentUnderWaterNoise");
+        AudioManager.instance.StopSound("PlayerBreathUnderWater");
+        AudioManager.instance.StopSound("PlayerHeartBeat");
     }
 }

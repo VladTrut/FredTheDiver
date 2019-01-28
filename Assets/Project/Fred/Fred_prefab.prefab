@@ -1111,6 +1111,7 @@ GameObject:
   - component: {fileID: 374887192}
   - component: {fileID: 374887190}
   - component: {fileID: 293305257}
+  - component: {fileID: 8464304905843969821}
   m_Layer: 13
   m_Name: Fred_prefab
   m_TagString: Player
@@ -1216,6 +1217,18 @@ MonoBehaviour:
   m_OxygenIncreaseRate: 10
   m_PassiveOxygenLossRate: 1
   m_SurfaceY: -1
+--- !u!114 &8464304905843969821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1725988634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4077d919d1e7d0e4dad21138338f5a67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1981324283
 GameObject:
   m_ObjectHideFlags: 0
@@ -1359,15 +1372,15 @@ PrefabInstance:
       objectReference: {fileID: 198619258089343998}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d7689380619fd894c8508730e2bed11f, type: 3}
---- !u!198 &198619258089343998 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 198619259117867094, guid: d7689380619fd894c8508730e2bed11f,
-    type: 3}
-  m_PrefabInstance: {fileID: 1118968744}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4891050396375430 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4891049361556014, guid: d7689380619fd894c8508730e2bed11f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1118968744}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &198619258089343998 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 198619259117867094, guid: d7689380619fd894c8508730e2bed11f,
     type: 3}
   m_PrefabInstance: {fileID: 1118968744}
   m_PrefabAsset: {fileID: 0}

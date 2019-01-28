@@ -70,7 +70,7 @@ public class MenuMgt : MonoBehaviour
     void ActivateGame(bool state)
     {
         m_UIOverlay.SetActive(state);
-        m_Project.GameStarted = state;
+        //m_Project.GameStarted = state;
         m_MenuCanvas.SetActive(!state);
         m_Player.SetActive(state);
         m_Boat.SetActive(state);

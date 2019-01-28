@@ -85,7 +85,7 @@ public class Player : MonoBehaviour
         if (head.y >= 0)
         {
             if (f.y > 0f)
-                f.y *= -10.0f;
+                f.y *= -1.0f;
         }
 
         m_body.AddForce(f, ForceMode.Impulse);

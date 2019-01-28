@@ -293,6 +293,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8055628088883737830, guid: ba48d5792556349f4b9abb055de57e02,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 802.8008
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ba48d5792556349f4b9abb055de57e02, type: 3}
 --- !u!1 &645191283 stripped
@@ -320,6 +325,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2675411604526095957, guid: fdf394d74561d934b82ab4dcf6228633,
+        type: 3}
+      propertyPath: m_Name
+      value: LowPolySchiff
+      objectReference: {fileID: 0}
     - target: {fileID: 2675411604526056053, guid: fdf394d74561d934b82ab4dcf6228633,
         type: 3}
       propertyPath: m_RootOrder
@@ -334,11 +344,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: -42.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2675411604526095957, guid: fdf394d74561d934b82ab4dcf6228633,
-        type: 3}
-      propertyPath: m_Name
-      value: LowPolySchiff (1)
       objectReference: {fileID: 0}
     - target: {fileID: 781328311, guid: fdf394d74561d934b82ab4dcf6228633, type: 3}
       propertyPath: m_LocalPosition.x
@@ -386,6 +391,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1014772976253422974, guid: b7377d6ec6592694285bdb5b763a8e8e,
+        type: 3}
+      propertyPath: m_Name
+      value: AudioManager
+      objectReference: {fileID: 0}
     - target: {fileID: 1014772976253422968, guid: b7377d6ec6592694285bdb5b763a8e8e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -441,11 +451,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1014772976253422974, guid: b7377d6ec6592694285bdb5b763a8e8e,
-        type: 3}
-      propertyPath: m_Name
-      value: AudioManager
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7377d6ec6592694285bdb5b763a8e8e, type: 3}
 --- !u!1 &1708790219 stripped
@@ -460,18 +465,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 374887187}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1885171101
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1885171095}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4077d919d1e7d0e4dad21138338f5a67, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &2053751481
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -549,6 +542,11 @@ PrefabInstance:
       propertyPath: m_boat
       value: 
       objectReference: {fileID: 1708790219}
+    - target: {fileID: 2697512558454366650, guid: 899659b4b06d6a747873c54cde5c1620,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2697512557962055472, guid: 899659b4b06d6a747873c54cde5c1620,
         type: 3}
       propertyPath: m_Intensity
