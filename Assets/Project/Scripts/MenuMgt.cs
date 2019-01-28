@@ -38,12 +38,16 @@ public class MenuMgt : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            ActivateGame(false);
-            m_EndCanvas.SetActive(false);
+        { 
+            if (!m_gameover)
+                GameOver();
+            else
+            {
+                ActivateGame(false);
+                m_EndCanvas.SetActive(false);
+            }
         }
-
-        if (m_gameover && (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Backspace)))
+        else if (m_gameover && (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Backspace)))
         {
             m_gameover = false;
             ActivateGame(false);
@@ -103,6 +107,7 @@ public class MenuMgt : MonoBehaviour
 
     void GameOver()
     {
+        m_gameover = true;
         ActivateGame(false);
         m_MenuCanvas.SetActive(false);
         m_EndCanvas.SetActive(true);

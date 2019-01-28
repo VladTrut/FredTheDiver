@@ -92,7 +92,8 @@ public class Player : MonoBehaviour
                 f.y *= -1.0f;
         }
 
-        m_body.AddForce(f, ForceMode.Impulse);
+        //m_body.AddForce(f, ForceMode.Impulse);
+        m_body.AddForceAtPosition(f, head, ForceMode.Impulse);
         m_body.AddForce(m_force, ForceMode.Impulse);
 
         float targetDir = Vector3.Dot(Vector3.right, f.normalized);
@@ -104,9 +105,9 @@ public class Player : MonoBehaviour
             if (isUp)
             {
                 if(m_direction == 1)
-                    m_body.AddTorque(Vector3.forward * alpha2 * 0.75f * Time.fixedDeltaTime * (isUp ? 1f : -1f), ForceMode.Force);
+                    m_body.AddTorque(Vector3.forward * alpha2 * 1f * Time.fixedDeltaTime * (isUp ? 1f : -1f), ForceMode.Force);
                 else if(m_direction == -1)
-                    m_body.AddTorque(Vector3.forward * alpha2 * 0.75f * Time.fixedDeltaTime * (isUp ? -1f : 1f), ForceMode.Force);
+                    m_body.AddTorque(Vector3.forward * alpha2 * 1f * Time.fixedDeltaTime * (isUp ? -1f : 1f), ForceMode.Force);
             }
         }
         // right
@@ -174,8 +175,11 @@ public class Player : MonoBehaviour
     private void OnParticleCollision(GameObject other)
     {
         var o2 = GetComponent<OxygenMgt>();
-        if(o2 != null)
+        if (o2 != null && o2.CurrentOxygen < o2.MaxOxygen)
+        {
             o2.CurrentOxygen = Mathf.Min(o2.CurrentOxygen + 10, o2.MaxOxygen);
+            AudioManager.instance.PlaySound("PlayerBreathAboveWater");
+        }
     }
 
     public bool Collect(Item item)

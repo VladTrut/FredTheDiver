@@ -13,6 +13,7 @@ public class Project : MonoBehaviour
     public GameObject m_boat;
     public float m_camDistance = 10.0f;
     public float m_segmentSize = 50.0f;
+    public GameObject m_spotLight;
 
     private List<GameObject> m_world = new List<GameObject>();
     private GameObject m_currentSegment;
@@ -61,7 +62,13 @@ public class Project : MonoBehaviour
     {
         //if (!m_GameStarted) return;
 
-        m_cam.transform.position = m_player.transform.position - Vector3.forward * m_camDistance;
+        Vector3 camPos = m_player.transform.position - Vector3.forward * m_camDistance;
+        camPos.z = Mathf.Max(camPos.z, -m_segmentSize - 2.0f);
+        m_cam.transform.position = camPos;
+
+        var pos = m_player.transform.position;
+        pos.y = 30;
+        m_spotLight.transform.position = pos;
     }
 
     public void GenerateFirstSegment()

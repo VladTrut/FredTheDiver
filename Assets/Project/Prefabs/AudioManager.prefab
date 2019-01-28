@@ -175,7 +175,7 @@ MonoBehaviour:
     playedOnce: 0
     initVol: 1
   - name: PlayerHeartBeat
-    clip: {fileID: 8300000, guid: 875c092f6bca6b044a5765c844b243c3, type: 3}
+    clip: {fileID: 8300000, guid: c6fdef9c50d7a8549924b58fcc85b54d, type: 3}
     source: {fileID: 0}
     volume: 1
     pitch: 1

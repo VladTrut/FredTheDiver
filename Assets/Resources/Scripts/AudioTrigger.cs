@@ -53,6 +53,7 @@ public class AudioTrigger : MonoBehaviour
         }
 
         myHeartBeatSource.volume = 0.1f + ((float)myOxygenMgt.MaxOxygen-(float)myOxygenMgt.CurrentOxygen)/(float)myOxygenMgt.MaxOxygen;
+        myHeartBeatSource.pitch = 1.0f + ((float)myOxygenMgt.MaxOxygen - (float)myOxygenMgt.CurrentOxygen) / (float)myOxygenMgt.MaxOxygen;
         //myAudioManager.PlaySound(mPlayerheartBeat);
     }
 

@@ -23,9 +23,8 @@ public class Item : MonoBehaviour
             return;
 
         float d = Vector3.Distance(transform.position, Player.instance.transform.position);
-        if(d < 3.0f)
+        if(d < 2.0f)
         {
-            m_isCollected = true;
             StartCoroutine(WaitAndCollect());
         }
     }
@@ -33,13 +32,17 @@ public class Item : MonoBehaviour
     IEnumerator WaitAndCollect()
     {
         yield return new WaitForSecondsRealtime(0.5f);
-        gameObject.SetActive(false);
-        Player.instance.Collect(this);
 
-        if(m_type == InventoryMgt.ItemType.COIN)
+        if (!Player.instance.Collect(this))
+            yield break;
+
+        m_isCollected = true;
+        gameObject.SetActive(false);
+
+        if (m_type == InventoryMgt.ItemType.COIN)
             AudioManager.instance.PlaySound("ItemCoin");
         else if (m_type == InventoryMgt.ItemType.BAR)
-            AudioManager.instance.PlaySound("ItemCoin");
+            AudioManager.instance.PlaySoundAt("ItemIngot", 1.5f);
         else if (m_type == InventoryMgt.ItemType.CHEST)
             AudioManager.instance.PlaySound("ItemChest");
         // TODO animation
