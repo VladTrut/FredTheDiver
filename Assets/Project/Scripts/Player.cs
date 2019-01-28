@@ -47,12 +47,12 @@ public class Player : MonoBehaviour
 
         if (!isPlayerDead)
         {
-            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
+            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.Z) || Input.GetKey(KeyCode.UpArrow))
             {
                 f += step * Vector3.up * Time.deltaTime;
                 isMoving = true;
             }
-            if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+            if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.LeftArrow))
             {
                 f += step * Vector3.left * Time.deltaTime;
                 isMoving = true;

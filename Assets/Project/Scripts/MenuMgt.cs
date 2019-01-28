@@ -16,7 +16,6 @@ public class MenuMgt : MonoBehaviour
     private void OnEnable()
     {
         OxygenMgt.OnOxygenExhausted += PlayDeadSoundAndGameover;
-
     }
 
     private void OnDisable()
@@ -75,19 +74,10 @@ public class MenuMgt : MonoBehaviour
     void ActivateGame(bool state)
     {
         m_UIOverlay.SetActive(state);
-        //m_Project.GameStarted = state;
         m_MenuCanvas.SetActive(!state);
         m_Player.SetActive(state);
         m_Boat.SetActive(state);
 
-        /*if (state == false)
-        {
-            GameObject[] lvls =  GameObject.FindGameObjectsWithTag("Level");
-            for (int i = 0; i < lvls.Length; i++)
-            {
-                Destroy(lvls[i]);
-            }
-        }*/
     }
 
     void PlayDeadSoundAndGameover()

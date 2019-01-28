@@ -11,7 +11,7 @@ public class EnemyAI : MonoBehaviour
 
     /* ---- DRAGON BEHAVIOR ---- */
 
-    public enum EnemyState { PATROL, TARGET, SLEEP, SURPRISED, GIVEUP };
+    public enum EnemyState { PATROL, TARGET, GIVEUP };
     [SerializeField] private EnemyState m_State;
     private EnemyState m_LastState;
    // [SerializeField] private AILerp m_AiLerpScript;
@@ -111,33 +111,16 @@ public class EnemyAI : MonoBehaviour
             switch (value)
             {
                 case EnemyState.PATROL:
-                    //m_AiLerpScript.canMove = true;
-                    //m_AiLerpScript.speed = m_PatrolSpeed;
                     m_Anim.SetBool("Attack", false);
                     break;
 
                 case EnemyState.TARGET:
-                    //m_AiLerpScript.canMove = m_CanMoveInTargetMode;
-                    //m_AiLerpScript.speed = m_TargetSpeed;
-                    
                     m_DetectionTransform.position = transform.position;
                     m_Anim.SetBool("Attack", true);
                     break;
 
-                case EnemyState.SLEEP:
-                    //if (m_LastState != EnemyState.SLEEP)
-                        //m_AiLerpScript.canMove = true;
-        
-                    //m_Anim.SetBool("Sleep", true);
-                    break;
-
-                case EnemyState.SURPRISED:
-                    //m_AiLerpScript.canMove = false;
-             
-                    break;
 
                 case EnemyState.GIVEUP:
-                    //m_AiLerpScript.canMove = true;
                     m_Anim.SetBool("Attack", false);
                     break;
 
@@ -146,9 +129,6 @@ public class EnemyAI : MonoBehaviour
                         Debug.Log("Unknown state in " + this.name);
                     break;
             }
-
-
-
             m_LastState = m_State;
             m_State = value;
 
@@ -166,8 +146,6 @@ public class EnemyAI : MonoBehaviour
 
     private void OnDestroy()
     {
-
-
         Destroy(transform.parent.gameObject);
     }
 
@@ -175,18 +153,10 @@ public class EnemyAI : MonoBehaviour
 
     private void Awake()
     {
-
-       // if (m_AiLerpScript == null)
-        //    m_AiLerpScript = GetComponent<AILerp>();
-      //  if (m_AISetter == null)
-           // m_AISetter = GetComponent<AIDestinationSetter>();
-
         if (m_Enemy == null)
             m_Enemy = GetComponent<Enemy>();
         if (m_Anim == null)
             m_Anim = GetComponent<Animator>();
-
-  
         if (m_Detection == null)
             m_Detection = GetComponentInChildren<EnemyDetection>().gameObject;
 
@@ -207,8 +177,6 @@ public class EnemyAI : MonoBehaviour
                 Debug.Log(this.name + " will not follow any target, possible target array is empty. Mode TARGET disabled");
             m_ModeEnabled[(int)EnemyState.TARGET] = false;
         }
-
-
 
         if (m_Randomize && m_PatrolPoints.Length < 3)
         {
@@ -231,10 +199,6 @@ public class EnemyAI : MonoBehaviour
 
         if (m_PatrolPoints.Length <= 1)
         {
-            m_ModeEnabled[(int)EnemyState.PATROL] = true;
-            m_ModeEnabled[(int)EnemyState.SLEEP] = false;
-            m_LastState = EnemyState.SLEEP;
-
             if (m_PatrolPoints.Length < 1)
                 m_StartPosition = transform.parent;
             else
@@ -243,13 +207,13 @@ public class EnemyAI : MonoBehaviour
         }
         else if (m_PatrolPoints.Length >= 2)
         {
-            m_ModeEnabled[(int)EnemyState.PATROL] = true;
-            m_ModeEnabled[(int)EnemyState.SLEEP] = false;
+
             m_LastState = EnemyState.PATROL;
             m_StartPosition = m_PatrolPoints[0];
         }
+        m_ModeEnabled[(int)EnemyState.PATROL] = true;
 
-        State = (m_ModeEnabled[(int)EnemyState.PATROL] == true) ? EnemyState.PATROL : EnemyState.SLEEP;
+        State = EnemyState.PATROL;
         m_DetectionTransform = new GameObject().transform; // empty gameobject
 
     }
@@ -264,12 +228,6 @@ public class EnemyAI : MonoBehaviour
             case EnemyState.TARGET:
                 TargetMode();
                 break;
-            case EnemyState.SLEEP:
-                SleepMode();
-                break;
-            case EnemyState.SURPRISED:
-                //SurprisedMode();
-                break;
             case EnemyState.GIVEUP:
                 GiveUpMode();
                 break;
@@ -279,81 +237,46 @@ public class EnemyAI : MonoBehaviour
                 break;
         }
 
-        /*if (m_Target.targettransform != null && State != EnemyState.SLEEP && State != EnemyState.SURPRISED)
-        {
-            if (!m_FacingRight && m_Target.targettransform.position.x - this.transform.position.x > 0)
-            {
-                FlipRotate();
-            }
-            else if (m_FacingRight && m_Target.targettransform.position.x - this.transform.position.x < 0)
-            {
-                FlipRotate();
-            }
-        }*/
-
     }
 
     private void FixedUpdate()
     {
         if (!m_ForceApplied)
             StartCoroutine(ApplyForce());
-        //Debug.Log(GetComponent<Rigidbody>().velocity);
-        /*Rigidbody rb = GetComponent<Rigidbody>();
-        if (rb.velocity.x > m_MaxSpeed)
-            rb.velocity = new Vector3(m_MaxSpeed, rb.velocity.y, rb.velocity.z);
-        if (rb.velocity.y > m_MaxSpeed)
-            rb.velocity = new Vector3(rb.velocity.x, m_MaxSpeed, rb.velocity.z);
-        if (rb.velocity.z > m_MaxSpeed)
-            rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, m_MaxSpeed);
-        if (rb.velocity.x < -m_MinSpeed)
-            rb.velocity = new Vector3(-m_MinSpeed, rb.velocity.y, rb.velocity.z);
-        if (rb.velocity.y < -m_MinSpeed)
-            rb.velocity = new Vector3(rb.velocity.x, -m_MinSpeed, rb.velocity.z);
-        if (rb.velocity.z < -m_MinSpeed)
-            rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, -m_MinSpeed);*/
-
-
-
     }
 
     private IEnumerator ApplyForce()
     {
         m_ForceApplied = true;
+
         if (m_Target != null && m_Target.targettransform != null)
         {
             Vector3 vec = m_Target.targettransform.position - transform.position;
             vec.Normalize();
-            //GetComponent<Rigidbody>().AddForce(vec * Time.fixedDeltaTime * m_PatrolSpeed, ForceMode.Force);
             GetComponent<Rigidbody>().velocity = vec * m_PatrolSpeed;
 
             Vector3 difference = m_Target.targettransform.position - transform.position;
             difference.Normalize();
-            float rotZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
-            float rotX = Mathf.Atan2(difference.y, difference.z) * Mathf.Rad2Deg;
             float rotY = Mathf.Atan2(difference.x, difference.z) * Mathf.Rad2Deg;
 
             this.transform.rotation = Quaternion.Euler(transform.rotation.x, rotY, transform.rotation.y);
         }
 
         yield return new WaitForSeconds(m_ApplyForceDelay);
+
         m_ForceApplied = false;
     }
 
     void PatrolMode()
     {
         m_Detection.transform.localScale = new Vector3(1, 1, 1);
-    
-
-   
 
         if (m_Target.targettransform != m_PatrolPoints[m_PatrolPointIndex])
         {
-            //m_AISetter.target = m_PatrolPoints[m_PatrolPointIndex];
             m_Target.targettransform = m_PatrolPoints[m_PatrolPointIndex];
             m_Target.targetpriority = 0;
 
         }
-        //Debug.Log(Vector3.Distance(m_PatrolPoints[m_PatrolPointIndex].position, this.transform.position));
         if (Vector3.Distance(m_PatrolPoints[m_PatrolPointIndex].position, this.transform.position) < m_PointReachDist)
         {
             if (m_Randomize)
@@ -389,9 +312,6 @@ public class EnemyAI : MonoBehaviour
     
         m_IsSurprisedDelayInit = false;
 
-
-
-
         if (m_Target.targettransform != null)
         {
             //Debug.Log(Vector3.Distance(m_Target.targettransform.position, m_DetectionTransform.position));
@@ -400,20 +320,13 @@ public class EnemyAI : MonoBehaviour
                 SetTargetState(m_DetectionTransform, 0, EnemyState.GIVEUP);
             }
         }
-
-
-
-
-
     }
 
     void SleepMode()
     {
 
         m_Detection.transform.localScale = new Vector3(m_SleepScaleTrigger, m_SleepScaleTrigger, m_SleepScaleTrigger);
-      
 
-        //m_AISetter.target = m_StartPosition;
         m_Target.targettransform = m_StartPosition;
 
         if (m_SleepRight != m_FacingRight)
@@ -448,48 +361,30 @@ public class EnemyAI : MonoBehaviour
         if (Vector3.Distance(transform.position, m_DetectionTransform.position) <= m_PointReachDist)
         {
             m_ModeEnabled[(int)EnemyState.TARGET] = true;
-            if (m_ModeEnabled[(int)EnemyState.SLEEP] == true)
-                SetTargetState(transform.parent.transform, 0, EnemyState.SLEEP);
-            else
-                SetTargetState(transform.parent.transform, 0, EnemyState.PATROL);
+            SetTargetState(transform.parent.transform, 0, EnemyState.PATROL);
         }
 
     }
 
     private void FlipScale()
     {
-        // unparent expressionmanager then reparent it after scaling
-        //m_ExpressionManager.transform.parent = null;
-
         m_FacingRight = !m_FacingRight;
         Vector3 scale = transform.localScale;
         scale.x *= -1;
         transform.localScale = scale;
-
-        //m_ExpressionManager.transform.parent = transform;
     }
 
     private void FlipRotate()
     {
 
         transform.Rotate(new Vector3(0, 180, 0));
-
-        //   transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.x, 0, transform.rotation.z));
-        //transform.Rotate Quaternion.Euler(new Vector3(transform.rotation.x, 180, transform.rotation.z));
-        // Switch the way the player is labelled as facing.
         m_FacingRight = !m_FacingRight;
-
-        /*Vector3 scale = m_ExpressionManager.transform.localScale;
-        scale.x *= -1;
-        m_ExpressionManager.transform.localScale = scale;*/
-
     }
 
     public void SetTargetState(Transform targettransform, int priority, EnemyState state)
     {
         if (State != state)
         {
-           //m_AISetter.target = targettransform.transform;
             m_Target.targettransform = targettransform.transform;
 
             m_Target.targetpriority = priority;
@@ -497,92 +392,6 @@ public class EnemyAI : MonoBehaviour
             State = state;
         }
     }
-
-
-    /* public void SetTarget(GameObject targetobj, int priority)
-     {
-         if (State != EnemyState.TARGET)
-         {
-             m_AISetter.target = targetobj.transform;
-             m_Target.targettransform = targetobj.transform;
-
-             m_Target.targetdata.priority = priority;
-
-             State = EnemyState.TARGET;
-         }
-
-     }
-
-     public void SetPreTarget(GameObject targetobj, int priority)
-     {
-         m_AISetter.target = targetobj.transform;
-         m_Target.targettransform = targetobj.transform;
-
-         m_Target.targetdata.priority = priority;
-
-         State = EnemyState.SURPRISED;
-     }
-
-     private void UnsetTarget(GameObject targetobj, float detectiondistance, float giveupdistance, int priority)
-     {
-         m_Target.targettransform = null;
-         State = EnemyState.TARGET;
-     }*/
-
-
-
-    /* private void DetectTarget(string targetname, string targettag, float detectiondistance, float giveupdistance, int priority)
-     {
-         GameObject[] potentialtargets = GameObject.FindGameObjectsWithTag(targettag);
-         GameObject target = null;
-
-         if (potentialtargets.Length >= 1)
-         {
-             for (int i = 0; i < potentialtargets.Length; i++)
-             {
-                 if (potentialtargets[i].name == targetname)
-                 {
-                     if (target != null)
-                         Debug.Log("More than one target found with name : " + targetname + " in tags : " + targettag);
-                     target = potentialtargets[i];
-                 }
-
-             }
-             if (target == null)
-             {
-                 Debug.Log("No target found with name : " + targetname + " in tags : " + targettag);
-                 return;
-             }
-         }
-         else
-         {
-             Debug.Log("No target found with tag : " + targettag);
-             return;
-         }
-
-         if (Vector3.Distance(transform.position, target.transform.position) <= detectiondistance )
-         {
-             RaycastHit2D hit = Physics2D.Raycast(this.transform.position, target.transform.position - this.transform.position, detectiondistance, m_WhatIsTarget);
-             //if (hit)
-               //  Debug.Log("hit : " + hit.transform.gameObject.name + " " + hit.transform.gameObject.tag);
-             //Debug.DrawLine(this.transform.position, target.transform.position - this.transform.position, Color.red);
-
-             if (m_Target.targettransform != null)
-             {
-                 if (priority >= m_Target.targetdata.priority && hit.collider != null && hit.collider.gameObject.name == targetname)
-                     SetTarget(target, detectiondistance, giveupdistance, priority);
-             }
-             else
-                 SetTarget(target, detectiondistance, giveupdistance, priority);
-         }
-     }*/
-
-    /*private IEnumerator ShutOffDetection()
-    {
-        m_ShutOffDetect = true;
-        yield return new WaitForSeconds(3f);
-        m_ShutOffDetect = false;
-    }*/
 
     private int GetRandomTagetIndex()
     {
@@ -600,19 +409,6 @@ public class EnemyAI : MonoBehaviour
         return 0;
     }
 
-    private void OnPlayerSwim(bool state)
-    {
-        m_IsPlayerSwimming = state;
-
-    }
-
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (State == EnemyState.SLEEP && collision.gameObject.tag == "Player")
-            FlipRotate();
-    }
-
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -621,22 +417,6 @@ public class EnemyAI : MonoBehaviour
             OxygenMgt playerox = collision.gameObject.GetComponent<OxygenMgt>(); 
             if (playerox != null) { playerox.DecreaseOxygen(m_Damage); }
             Destroy(gameObject);
-        }
-
-    }
-
-
-    private void OnCollisionStay(Collision collision)
-    {
-        if (collision.gameObject.tag == "Player")
-        {
-            OxygenMgt playerox = collision.gameObject.GetComponent<OxygenMgt>();
-            if (playerox != null)
-            {
-                if (!m_DamageTriggered)
-                    StartCoroutine(DecreaseOx(playerox, m_Damage));
-
-            }
         }
 
     }
