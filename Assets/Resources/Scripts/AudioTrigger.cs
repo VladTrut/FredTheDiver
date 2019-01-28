@@ -37,9 +37,8 @@ public class AudioTrigger : MonoBehaviour
             myHeartBeatSource = myAudioManager.GetSource(mPlayerheartBeat);
         }
         
-        if (myPlayer.transform.position.y+transform.up.y >= -0.5)
+        if (transform.position.y + transform.up.y >= -0.5f)
         {
-
             myAudioManager.StopSound(mPlayerBreathUnderWater);
             myAudioManager.StopSound(mEnvironmentUnderWaterNoise);
             myAudioManager.PlaySound(mPlayerBreathAboveWater);
@@ -53,8 +52,8 @@ public class AudioTrigger : MonoBehaviour
             myAudioManager.StopSound(mEnvironmentAboveWaterNoise);
         }
 
-        myHeartBeatSource.volume = ((float)myOxygenMgt.MaxOxygen-(float)myOxygenMgt.CurrentOxygen)/(float)myOxygenMgt.MaxOxygen;
-        myAudioManager.PlaySound(mPlayerheartBeat);
+        myHeartBeatSource.volume = 0.1f + ((float)myOxygenMgt.MaxOxygen-(float)myOxygenMgt.CurrentOxygen)/(float)myOxygenMgt.MaxOxygen;
+        //myAudioManager.PlaySound(mPlayerheartBeat);
     }
 
     private void OnCollisionEnter(Collision collision)

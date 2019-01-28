@@ -8,6 +8,7 @@ public class OxygenMgt : MonoBehaviour
     [SerializeField] private AirBarMgt m_AirBarUI;
     private bool m_SwimMode = false;
     private bool m_Swimming = false;
+    private bool m_IsPlayerDead = false;
     [SerializeField] private int m_CurrentOxygen;
     [SerializeField] private int m_MaxOxygen;
 
@@ -16,7 +17,7 @@ public class OxygenMgt : MonoBehaviour
     [SerializeField] private float m_OxygenIncreaseRate;
     [SerializeField] private float m_PassiveOxygenLossRate;
 
-    [SerializeField] private float m_SurfaceY = 0f;
+    [SerializeField] private float m_SurfaceY = 0.0f;
 
     public delegate void OnOxygenExhaustedDel();
     public static event OnOxygenExhaustedDel OnOxygenExhausted;
@@ -51,8 +52,6 @@ public class OxygenMgt : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
-
         CurrentOxygen = MaxOxygen;
 
         if (m_AirBarUI == null)
@@ -63,18 +62,17 @@ public class OxygenMgt : MonoBehaviour
         }
 
         m_AirBarUI.SetOxygen( CurrentOxygen, MaxOxygen);
-
-
     }
 
 
     // Update is called once per frame
     void Update()
     {
-    
+        if (m_IsPlayerDead)
+            return;
+
         m_AirBarUI.SetOxygen( CurrentOxygen, MaxOxygen);
         SurfaceCheck();
-
     }
 
     private void SurfaceCheck()
@@ -84,11 +82,9 @@ public class OxygenMgt : MonoBehaviour
             CancelInvoke("IncreaseOxygen");
             if (!IsInvoking("PassiveOxygenLoss"))
                 InvokeRepeating("PassiveOxygenLoss", 1f / m_PassiveOxygenLossRate, 1f / m_PassiveOxygenLossRate);
-
         }
         else
         {
-
             CancelInvoke("PassiveOxygenLoss");
             InvokeRepeating("IncreaseOxygen", 1f / m_OxygenIncreaseRate, 1f / m_OxygenIncreaseRate);
         }
@@ -97,6 +93,7 @@ public class OxygenMgt : MonoBehaviour
         {
             CancelInvoke("PassiveOxygenLoss");
             CurrentOxygen = 0;
+            m_IsPlayerDead = true;
             if (OnOxygenExhausted != null)
                 OnOxygenExhausted();
         }
@@ -125,5 +122,6 @@ public class OxygenMgt : MonoBehaviour
     public void Reset()
     {
         CurrentOxygen = MaxOxygen;
+        m_IsPlayerDead = false;
     }
 }

@@ -43,26 +43,30 @@ public class Player : MonoBehaviour
         Vector3 f = Vector3.zero;
         float step = m_speed;
         bool isMoving = false;
- 
-        if (Input.GetKey(KeyCode.W))
+        bool isPlayerDead = OxygenMgt.instance.CurrentOxygen <= 0;
+
+        if (!isPlayerDead)
         {
-            f += step * Vector3.up * Time.deltaTime;
-            isMoving = true;
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            f += step * Vector3.left * Time.deltaTime;
-            isMoving = true;
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            f -= step * Vector3.up * Time.deltaTime;
-            isMoving = true;
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            f -= step * Vector3.left * Time.deltaTime;
-            isMoving = true;     
+            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
+            {
+                f += step * Vector3.up * Time.deltaTime;
+                isMoving = true;
+            }
+            if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+            {
+                f += step * Vector3.left * Time.deltaTime;
+                isMoving = true;
+            }
+            if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
+            {
+                f -= step * Vector3.up * Time.deltaTime;
+                isMoving = true;
+            }
+            if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+            {
+                f -= step * Vector3.left * Time.deltaTime;
+                isMoving = true;
+            }
         }
 
         if(isMoving)
@@ -190,10 +194,14 @@ public class Player : MonoBehaviour
 
     public void GiveAllBack()
     {
+        if (m_items.Count == 0)
+            return;
+
         InventoryMgt.instance.GiveAllBack((int)m_itemsValue);
         m_items.Clear();
         m_itemsWeight = 0.0f;
         m_itemsValue = 0.0f;
+        AudioManager.instance.PlaySound("BoatTakeAllItems");
     }
 
     public void Reset()

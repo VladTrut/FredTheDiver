@@ -234,4 +234,34 @@ MonoBehaviour:
     loop: 1
     playedOnce: 0
     initVol: 1
+  - name: Music01
+    clip: {fileID: 8300000, guid: 5ebef0a001ab7174990deff25fdbb229, type: 3}
+    source: {fileID: 0}
+    volume: 1
+    pitch: 1
+    randomVolume: 0
+    randomPitch: 0
+    loop: 1
+    playedOnce: 0
+    initVol: 1
+  - name: BoatTakeAllItems
+    clip: {fileID: 8300000, guid: c386d7ca757a4584b957ff08fa286129, type: 3}
+    source: {fileID: 0}
+    volume: 1
+    pitch: 1
+    randomVolume: 0
+    randomPitch: 0
+    loop: 0
+    playedOnce: 0
+    initVol: 1
+  - name: PlayerDead
+    clip: {fileID: 8300000, guid: 80d1d51673863f94abfc5cf9c03b5123, type: 3}
+    source: {fileID: 0}
+    volume: 1
+    pitch: 1.5
+    randomVolume: 0.15
+    randomPitch: 0.15
+    loop: 0
+    playedOnce: 0
+    initVol: 1
   m_IsCrossFading: 0

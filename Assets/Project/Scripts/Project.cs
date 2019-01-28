@@ -125,6 +125,7 @@ public class Project : MonoBehaviour
         m_player.Reset();
         GenerateFirstSegment();
         enabled = true;
+        AudioManager.instance.PlaySound("PlayerHeartBeat");
     }
 
     public void GameOver()

@@ -15,13 +15,13 @@ public class MenuMgt : MonoBehaviour
 
     private void OnEnable()
     {
-        OxygenMgt.OnOxygenExhausted += GameOver;
+        OxygenMgt.OnOxygenExhausted += PlayDeadSoundAndGameover;
 
     }
 
     private void OnDisable()
     {
-        OxygenMgt.OnOxygenExhausted -= GameOver;
+        OxygenMgt.OnOxygenExhausted -= PlayDeadSoundAndGameover;
     }
 
     // Start is called before the first frame update
@@ -31,6 +31,7 @@ public class MenuMgt : MonoBehaviour
         m_MenuCanvas.SetActive(true);
         m_Player.SetActive(false);
         m_Boat.SetActive(false);
+        AudioManager.instance.PlaySound("Music01");
     }
 
     // Update is called once per frame
@@ -42,7 +43,7 @@ public class MenuMgt : MonoBehaviour
             m_EndCanvas.SetActive(false);
         }
 
-        if (m_gameover && (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Return)))
+        if (m_gameover && (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Backspace)))
         {
             m_gameover = false;
             ActivateGame(false);
@@ -85,16 +86,26 @@ public class MenuMgt : MonoBehaviour
         }*/
     }
 
+    void PlayDeadSoundAndGameover()
+    {
+        StartCoroutine(PlayDeadSound());
+    }
 
+    IEnumerator PlayDeadSound()
+    {
+        m_gameover = true;
+        AudioManager.instance.PlaySound("PlayerDead");
+        while (AudioManager.instance.IsSoundPlayed("PlayerDead"))
+            yield return null;
+
+        GameOver();
+    }
 
     void GameOver()
     {
-        m_gameover = true;
         ActivateGame(false);
         m_MenuCanvas.SetActive(false);
         m_EndCanvas.SetActive(true);
         m_Project.GameOver();
     }
-
-
 }
