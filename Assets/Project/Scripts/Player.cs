@@ -26,6 +26,8 @@ public class Player : MonoBehaviour
     private float m_itemsMaxWeight = 100;
     private float m_itemsValue = 0;
 
+    [SerializeField] private float m_FullChargeSpeedCoeff = 0.25f;
+
     private void Awake()
     {
         instance = this;
@@ -92,9 +94,11 @@ public class Player : MonoBehaviour
                 f.y *= -1.0f;
         }
 
+        float weightCoeff = (m_FullChargeSpeedCoeff - 1f)/m_itemsMaxWeight * m_itemsWeight + 1f;
+
         //m_body.AddForce(f, ForceMode.Impulse);
         m_body.AddForceAtPosition(f, head, ForceMode.Impulse);
-        m_body.AddForce(m_force, ForceMode.Impulse);
+        m_body.AddForce(m_force * weightCoeff, ForceMode.Impulse);
 
         float targetDir = Vector3.Dot(Vector3.right, f.normalized);
 
@@ -105,9 +109,9 @@ public class Player : MonoBehaviour
             if (isUp)
             {
                 if(m_direction == 1)
-                    m_body.AddTorque(Vector3.forward * alpha2 * 1f * Time.fixedDeltaTime * (isUp ? 1f : -1f), ForceMode.Force);
+                    m_body.AddTorque(Vector3.forward * alpha2 * 1f * Time.fixedDeltaTime * (isUp ? 1f : -1f) , ForceMode.Force);
                 else if(m_direction == -1)
-                    m_body.AddTorque(Vector3.forward * alpha2 * 1f * Time.fixedDeltaTime * (isUp ? -1f : 1f), ForceMode.Force);
+                    m_body.AddTorque(Vector3.forward * alpha2 * 1f * Time.fixedDeltaTime * (isUp ? -1f : 1f) , ForceMode.Force);
             }
         }
         // right

@@ -430,6 +430,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2675411604526095957, guid: fdf394d74561d934b82ab4dcf6228633,
+        type: 3}
+      propertyPath: m_Name
+      value: LowPolySchiff
+      objectReference: {fileID: 0}
     - target: {fileID: 2675411604526056053, guid: fdf394d74561d934b82ab4dcf6228633,
         type: 3}
       propertyPath: m_RootOrder
@@ -444,11 +449,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: -42.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2675411604526095957, guid: fdf394d74561d934b82ab4dcf6228633,
-        type: 3}
-      propertyPath: m_Name
-      value: LowPolySchiff
       objectReference: {fileID: 0}
     - target: {fileID: 781328311, guid: fdf394d74561d934b82ab4dcf6228633, type: 3}
       propertyPath: m_LocalPosition.x
@@ -472,6 +472,22 @@ PrefabInstance:
       propertyPath: m_UIOverlay
       value: 
       objectReference: {fileID: 1141204562}
+    - target: {fileID: 3641150206077408086, guid: fdf394d74561d934b82ab4dcf6228633,
+        type: 3}
+      propertyPath: m_targetIcon
+      value: 
+      objectReference: {fileID: 21300000, guid: 3c627e8766f154056a0e1bae43d2c237,
+        type: 3}
+    - target: {fileID: 3641150206077408086, guid: fdf394d74561d934b82ab4dcf6228633,
+        type: 3}
+      propertyPath: m_ArrowOffs
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3641150206077408086, guid: fdf394d74561d934b82ab4dcf6228633,
+        type: 3}
+      propertyPath: m_TxtOffs
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 2675411604528197877, guid: fdf394d74561d934b82ab4dcf6228633,
         type: 3}
       propertyPath: m_Convex

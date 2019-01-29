@@ -1199,6 +1199,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_speed: 10
+  m_FullChargeSpeedCoeff: 0.6
 --- !u!114 &293305257
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1415,22 +1416,11 @@ PrefabInstance:
       propertyPath: CollisionModule.enabled
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 198866036663756580, guid: d7689380619fd894c8508730e2bed11f,
-        type: 3}
-      propertyPath: SubModule.subEmitters.Array.data[0].emitter
-      value: 
-      objectReference: {fileID: 198619258089343998}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d7689380619fd894c8508730e2bed11f, type: 3}
 --- !u!4 &4891050396375430 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4891049361556014, guid: d7689380619fd894c8508730e2bed11f,
-    type: 3}
-  m_PrefabInstance: {fileID: 1118968744}
-  m_PrefabAsset: {fileID: 0}
---- !u!198 &198619258089343998 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 198619259117867094, guid: d7689380619fd894c8508730e2bed11f,
     type: 3}
   m_PrefabInstance: {fileID: 1118968744}
   m_PrefabAsset: {fileID: 0}

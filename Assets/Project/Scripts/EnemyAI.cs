@@ -47,15 +47,10 @@ public class EnemyAI : MonoBehaviour
     public TargetData[] m_TargetsArray;
     public LayerMask m_WhatIsTarget;
     [SerializeField] private float m_GiveUpDistance = 15f;
-    [SerializeField] private bool m_CanMoveInTargetMode = true;
-    [SerializeField] private float m_TargetSpeed;
 
     // Detection
     [SerializeField] private GameObject m_Detection;
     private Transform m_DetectionTransform;
-    [HideInInspector] public bool m_IsPlayerSwimming;
-    public bool m_UndetectIfPlayerSwimIs;
-    [Range(0f, 1f)] [SerializeField] private float m_SleepScaleTrigger = 1f;
 
     // orientation
     private bool m_FacingRight = true;
@@ -69,25 +64,13 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private int m_PatrolPointIndex = 0;
     public bool m_Randomize;
     private int[] m_validChoices;
-    [SerializeField] private float m_PatrolSpeed;
+    [SerializeField] private float m_Speed;
     [SerializeField] private float m_PointReachDist;
     /* ----------------------------- */
 
     /* ---- MODE SLEEP ---- */
 
     private Transform m_StartPosition;
-    public bool m_SleepRight;
-    [SerializeField] private float m_MaxSpeed = 1f;
-    [SerializeField] private float m_MinSpeed = 1f;
-
-
-    /* ----------------------------- */
-
-    /* ---- MODE SURPRISED ---- */
-
-    [SerializeField] private float m_SurprisedDelay = 3f;
-    private bool m_IsSurprisedDelayInit;
-    private float m_InitSurprisedTime;
 
     /* ----------------------------- */
     private bool m_ForceApplied = false;
@@ -119,7 +102,6 @@ public class EnemyAI : MonoBehaviour
                     m_Anim.SetBool("Attack", true);
                     break;
 
-
                 case EnemyState.GIVEUP:
                     m_Anim.SetBool("Attack", false);
                     break;
@@ -129,7 +111,6 @@ public class EnemyAI : MonoBehaviour
                         Debug.Log("Unknown state in " + this.name);
                     break;
             }
-            m_LastState = m_State;
             m_State = value;
 
         }
@@ -196,25 +177,12 @@ public class EnemyAI : MonoBehaviour
 
     private void Start()
     {
-
-        if (m_PatrolPoints.Length <= 1)
-        {
-            if (m_PatrolPoints.Length < 1)
-                m_StartPosition = transform.parent;
-            else
-                m_StartPosition = m_PatrolPoints[0];
-
-        }
-        else if (m_PatrolPoints.Length >= 2)
-        {
-
-            m_LastState = EnemyState.PATROL;
-            m_StartPosition = m_PatrolPoints[0];
-        }
+    
         m_ModeEnabled[(int)EnemyState.PATROL] = true;
 
         State = EnemyState.PATROL;
-        m_DetectionTransform = new GameObject().transform; // empty gameobject
+        m_DetectionTransform = new GameObject().transform;// empty gameobject
+        m_DetectionTransform.SetParent(this.transform);
 
     }
 
@@ -253,7 +221,7 @@ public class EnemyAI : MonoBehaviour
         {
             Vector3 vec = m_Target.targettransform.position - transform.position;
             vec.Normalize();
-            GetComponent<Rigidbody>().velocity = vec * m_PatrolSpeed;
+            GetComponent<Rigidbody>().velocity = vec * m_Speed;
 
             Vector3 difference = m_Target.targettransform.position - transform.position;
             difference.Normalize();
@@ -288,7 +256,6 @@ public class EnemyAI : MonoBehaviour
             }
             else
             {
-                Debug.Log("length : " + m_PatrolPoints.Length);
                 if (m_PatrolPointIndex >= m_PatrolPoints.Length - 1)
                 {
                     m_PatrolPointIndex = 0;
@@ -299,7 +266,6 @@ public class EnemyAI : MonoBehaviour
 
                     m_LastPatrolIndex = m_PatrolPointIndex;
                     ++m_PatrolPointIndex;
-                    Debug.Log("m_PatrolPointIndex : " + m_PatrolPointIndex);
                 }
             }
 
@@ -309,12 +275,8 @@ public class EnemyAI : MonoBehaviour
 
     void TargetMode()
     {
-    
-        m_IsSurprisedDelayInit = false;
-
         if (m_Target.targettransform != null)
         {
-            //Debug.Log(Vector3.Distance(m_Target.targettransform.position, m_DetectionTransform.position));
             if (Vector3.Distance(m_Target.targettransform.position, m_DetectionTransform.position) >= m_GiveUpDistance)
             {
                 SetTargetState(m_DetectionTransform, 0, EnemyState.GIVEUP);
@@ -322,36 +284,6 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    void SleepMode()
-    {
-
-        m_Detection.transform.localScale = new Vector3(m_SleepScaleTrigger, m_SleepScaleTrigger, m_SleepScaleTrigger);
-
-        m_Target.targettransform = m_StartPosition;
-
-        if (m_SleepRight != m_FacingRight)
-            FlipRotate();
-
-    }
-
-    void SurprisedMode()
-    {
-  
-
-        if (!m_IsSurprisedDelayInit)
-        {
-            m_InitSurprisedTime = Time.time;
-            m_IsSurprisedDelayInit = true;
-        }
-
-
-        if (Time.time - m_InitSurprisedTime > m_SurprisedDelay)
-        {
-            State = m_LastState;
-            m_IsSurprisedDelayInit = false;
-        }
-
-    }
 
     void GiveUpMode()
     {

@@ -6,14 +6,10 @@ public class OxygenMgt : MonoBehaviour
     public static OxygenMgt instance;
 
     [SerializeField] private AirBarMgt m_AirBarUI;
-    private bool m_SwimMode = false;
-    private bool m_Swimming = false;
     private bool m_IsPlayerDead = false;
     [SerializeField] private int m_CurrentOxygen;
     [SerializeField] private int m_MaxOxygen;
 
-    public List<ParticleCollisionEvent> collisionEvents;
-    //[SerializeField] private float m_OxygenDecreaseRate;
     [SerializeField] private float m_OxygenIncreaseRate;
     [SerializeField] private float m_PassiveOxygenLossRate;
 
