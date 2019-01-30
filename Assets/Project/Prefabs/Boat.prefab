@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 781328314}
   - component: {fileID: 781328313}
   - component: {fileID: 781328312}
+  - component: {fileID: 645191288}
   m_Layer: 11
   m_Name: Cube
   m_TagString: Untagged
@@ -27,8 +28,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 781328310}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.03}
-  m_LocalScale: {x: 2.4990172, y: 2.8017204, z: 4.1255}
+  m_LocalPosition: {x: 0.95, y: 0, z: -0.03}
+  m_LocalScale: {x: 7.94, y: 4.9, z: 4.1255}
   m_Children: []
   m_Father: {fileID: 2675411604526056053}
   m_RootOrder: 0
@@ -86,11 +87,23 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 781328310}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &645191288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 781328310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0daae84f6c7f4244ab25d7b4e46778c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2605548120532309576
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -103,6 +116,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d1a63683f22f014e87cdf7029a27153, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_maxSafeDistance: 100
+  m_speed: 1
   m_range: 0.15
 --- !u!114 &3641150206077408086
 MonoBehaviour:
@@ -116,15 +131,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99fb5013bc7444d98adcfd9cde95086f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_targetIconOffScreen: {fileID: 21300000, guid: 3c627e8766f154056a0e1bae43d2c237,
-    type: 3}
-  m_edgeBuffer: 0
+  m_player: {fileID: 0}
+  m_UIOverlay: {fileID: 0}
+  m_targetIcon: {fileID: 21300000, guid: 3c627e8766f154056a0e1bae43d2c237, type: 3}
   m_targetIconScale: {x: 1, y: 1, z: 1}
-  ShowDebugLines: 0
-  offset: 15
+  m_ArrowOffs: 15
   m_DistFont: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
   m_DistTextSize: 40
-  m_ArrowOffs: 2
+  m_TxtOffs: 15
 --- !u!1001 &2675411604526192885
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -132,17 +146,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 100000, guid: d5bb9b1e517fb40418eee7da18019a8e, type: 3}
-      propertyPath: m_Name
-      value: LowPolySchiff
-      objectReference: {fileID: 0}
-    - target: {fileID: 2300000, guid: d5bb9b1e517fb40418eee7da18019a8e, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 646e66202761a654fb3647bd0d8003ce, type: 2}
     - target: {fileID: 400000, guid: d5bb9b1e517fb40418eee7da18019a8e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 50.4
+      value: -15.52
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d5bb9b1e517fb40418eee7da18019a8e, type: 3}
       propertyPath: m_LocalPosition.y
@@ -150,7 +156,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d5bb9b1e517fb40418eee7da18019a8e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -45
+      value: -42.5
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d5bb9b1e517fb40418eee7da18019a8e, type: 3}
       propertyPath: m_LocalRotation.x
@@ -196,6 +202,14 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: d5bb9b1e517fb40418eee7da18019a8e, type: 3}
+      propertyPath: m_Name
+      value: Boat
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: d5bb9b1e517fb40418eee7da18019a8e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 646e66202761a654fb3647bd0d8003ce, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d5bb9b1e517fb40418eee7da18019a8e, type: 3}
 --- !u!1 &2675411604526095957 stripped

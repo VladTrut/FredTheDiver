@@ -82,9 +82,6 @@ public class AudioManager : MonoBehaviour {
             sounds[i].SetSource(_obj.AddComponent<AudioSource>());
             sounds[i].initVol = sounds[i].volume;
         }
-
-        PlaySound("Breathe outside water");
-
     }
 
 

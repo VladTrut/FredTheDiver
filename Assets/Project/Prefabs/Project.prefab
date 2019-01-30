@@ -494,9 +494,9 @@ MonoBehaviour:
   - {fileID: 8362124251379035238, guid: 38031e9307decb048baa85986acba046, type: 3}
   - {fileID: 2463853934295568181, guid: 5596115004ec3774abf8c6a9c8911443, type: 3}
   m_itemPrefab:
-  - {fileID: 1661058508896577587, guid: 56f6206b33df0bb418b472bd7d7d3543, type: 3}
-  - {fileID: 3494204327821242189, guid: 11e37a1805bab694a9ccb2611457b0e6, type: 3}
-  - {fileID: 4798967334818287630, guid: 86e4c08beb8025e459929d457cdb17cb, type: 3}
+  - {fileID: 928218530, guid: 56f6206b33df0bb418b472bd7d7d3543, type: 3}
+  - {fileID: 172675873, guid: 11e37a1805bab694a9ccb2611457b0e6, type: 3}
+  - {fileID: 1038039411, guid: 86e4c08beb8025e459929d457cdb17cb, type: 3}
   m_itemSpawnProbability: 0.8
   m_cam: {fileID: 1738106396}
   m_player: {fileID: 0}

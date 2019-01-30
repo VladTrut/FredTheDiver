@@ -29,6 +29,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.26, y: 0.8, z: 0.7}
   m_Center: {x: -0.01, y: 0.4, z: 0.08}
+--- !u!135 &8000538675957494891
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4798967334818287630}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1
+  m_Center: {x: 0, y: 0.38, z: 0}
 --- !u!114 &1038039411
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44,9 +57,7 @@ MonoBehaviour:
   m_type: 2
   m_weight: 25
   m_value: 180
-  m_size: 1
-  m_minDepth: 1
-  m_maxDepth: 100
+  m_spawnProbability: 0.25
 --- !u!1001 &4798967334818387674
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -56,7 +67,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100052, guid: 82b2d88c44206894cad5d889dad10a04, type: 3}
       propertyPath: m_Name
-      value: schatztruhe
+      value: Chest
       objectReference: {fileID: 0}
     - target: {fileID: 100052, guid: 82b2d88c44206894cad5d889dad10a04, type: 3}
       propertyPath: m_Layer

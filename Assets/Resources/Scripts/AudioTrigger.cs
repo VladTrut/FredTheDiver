@@ -59,19 +59,18 @@ public class AudioTrigger : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log(collision.gameObject.tag);
+        //Debug.Log(collision.gameObject.tag);
         switch (collision.gameObject.tag)
         {
-            
-            case "Rock":
-                myAudioManager.PlaySound("PlayerHeadHitting");
-                break;
+            // moved to PlayerHead.cs
+            //case "Rock":
+            //    myAudioManager.PlaySound("PlayerHeadHitting");
+            //    break;
             case "Fish":
                 myAudioManager.PlaySound("PlayerPain");
                 break;
             default:
                 break;
-               
         }
     }
 }

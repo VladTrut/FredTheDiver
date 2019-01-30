@@ -203,14 +203,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 100004, guid: 1c6111cf40550464c9284ae9814099d3, type: 3}
-      propertyPath: m_Name
-      value: leuchtkugelpflanze
-      objectReference: {fileID: 0}
-    - target: {fileID: 100002, guid: 1c6111cf40550464c9284ae9814099d3, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 1c6111cf40550464c9284ae9814099d3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.324
@@ -254,6 +246,14 @@ PrefabInstance:
     - target: {fileID: 400004, guid: 1c6111cf40550464c9284ae9814099d3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: 1c6111cf40550464c9284ae9814099d3, type: 3}
+      propertyPath: m_Name
+      value: OxygenPlant
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 1c6111cf40550464c9284ae9814099d3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2300004, guid: 1c6111cf40550464c9284ae9814099d3, type: 3}
       propertyPath: m_Materials.Array.data[0]

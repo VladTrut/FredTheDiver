@@ -25,12 +25,16 @@ public class Player : MonoBehaviour
     private float m_itemsWeight = 0;
     private float m_itemsMaxWeight = 100;
     private float m_itemsValue = 0;
+    private OxygenMgt m_oxygenManager;
+    public Vector3 BodyPosition { get => m_body.transform.position; }
+    public Vector3 HeadPosition { get => m_body.transform.position + m_body.transform.up; }
 
     [SerializeField] private float m_FullChargeSpeedCoeff = 0.25f;
 
     private void Awake()
     {
         instance = this;
+        m_oxygenManager = GetComponent<OxygenMgt>();
     }
 
     private void Start()
@@ -51,26 +55,35 @@ public class Player : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.Z) || Input.GetKey(KeyCode.UpArrow))
             {
-                f += step * Vector3.up * Time.deltaTime;
+                f += step * Vector3.up * Time.fixedDeltaTime;
                 isMoving = true;
             }
             if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.LeftArrow))
             {
-                f += step * Vector3.left * Time.deltaTime;
+                f += step * Vector3.left * Time.fixedDeltaTime;
                 isMoving = true;
             }
             if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
             {
-                f -= step * Vector3.up * Time.deltaTime;
+                f -= step * Vector3.up * Time.fixedDeltaTime;
                 isMoving = true;
             }
             if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
             {
-                f -= step * Vector3.left * Time.deltaTime;
+                f -= step * Vector3.left * Time.fixedDeltaTime;
                 isMoving = true;
+            }
+            if(Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
+            {
+                // TODO Boost
+            }
+            if(Input.GetKey(KeyCode.Space))
+            {
+                // TODO Drop some items
             }
         }
 
+        // TODO Smooth transition between states
         if(isMoving)
         {
             SwitchState(PlayerState.UnderwaterSwim);
@@ -178,10 +191,9 @@ public class Player : MonoBehaviour
 
     private void OnParticleCollision(GameObject other)
     {
-        var o2 = GetComponent<OxygenMgt>();
-        if (o2 != null && o2.CurrentOxygen < o2.MaxOxygen)
+        if (m_oxygenManager.CurrentOxygen < m_oxygenManager.MaxOxygen)
         {
-            o2.CurrentOxygen = Mathf.Min(o2.CurrentOxygen + 10, o2.MaxOxygen);
+            m_oxygenManager.CurrentOxygen = Mathf.Min(m_oxygenManager.CurrentOxygen + 10, m_oxygenManager.MaxOxygen);
             AudioManager.instance.PlaySound("PlayerBreathAboveWater");
         }
     }

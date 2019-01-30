@@ -7,34 +7,37 @@ public class Item : MonoBehaviour
     public InventoryMgt.ItemType m_type;
     public float m_weight = 1.0f;
     public float m_value = 1.0f;
-    public float m_size = 1.0f;
-    public float m_minDepth = 1.0f;
-    public float m_maxDepth = 100.0f;
+    public float m_spawnProbability = 1.0f;
 
     public float Weight { get => m_weight; }
     public float Value { get => m_value; }
     public InventoryMgt.ItemType Type { get => m_type; }
+    public float SpawnProbability { get => m_spawnProbability; }
 
     private bool m_isCollected = false;
+    private bool m_isCollecting = false;
 
-    private void FixedUpdate()
+    private void OnTriggerStay(Collider other)
     {
-        if (Player.instance == null || m_isCollected)
+        if (m_isCollecting)
             return;
 
-        float d = Vector3.Distance(transform.position, Player.instance.transform.position);
-        if(d < 2.0f)
+        if(other.gameObject.tag == "Player")
         {
+            m_isCollecting = true;
             StartCoroutine(WaitAndCollect());
         }
     }
 
     IEnumerator WaitAndCollect()
     {
-        yield return new WaitForSecondsRealtime(0.5f);
+        //yield return new WaitForSeconds(0.25f);
 
         if (!Player.instance.Collect(this))
+        {
+            m_isCollecting = false;
             yield break;
+        }
 
         m_isCollected = true;
         gameObject.SetActive(false);
@@ -45,6 +48,7 @@ public class Item : MonoBehaviour
             AudioManager.instance.PlaySoundAt("ItemIngot", 1.5f);
         else if (m_type == InventoryMgt.ItemType.CHEST)
             AudioManager.instance.PlaySound("ItemChest");
+
         // TODO animation
     }
 }

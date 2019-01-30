@@ -24,10 +24,10 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1661058508896577587}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
+  m_IsTrigger: 1
+  m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.8
   m_Center: {x: 0, y: 0, z: 0.0000000037252903}
 --- !u!114 &928218530
 MonoBehaviour:
@@ -44,9 +44,7 @@ MonoBehaviour:
   m_type: 0
   m_weight: 1
   m_value: 5
-  m_size: 1
-  m_minDepth: 1
-  m_maxDepth: 100
+  m_spawnProbability: 1
 --- !u!1001 &1661058508896480915
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -56,7 +54,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100000, guid: 688ab6b4699c58e43a66c9cd9f50df59, type: 3}
       propertyPath: m_Name
-      value: muenze
+      value: Coin
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 688ab6b4699c58e43a66c9cd9f50df59, type: 3}
       propertyPath: m_Layer

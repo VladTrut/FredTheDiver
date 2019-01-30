@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8055628087196413051}
   - component: {fileID: 8055628087196413050}
   - component: {fileID: 8055628087196413048}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: ScoreTexte
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -105,7 +105,7 @@ GameObject:
   - component: {fileID: 8055628087363234993}
   - component: {fileID: 8055628087363234999}
   - component: {fileID: 8055628087363234998}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: SelectionButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -180,7 +180,7 @@ GameObject:
   - component: {fileID: 8055628087471288528}
   - component: {fileID: 8055628087471288531}
   - component: {fileID: 8055628087471288530}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: EndCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -277,7 +277,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8055628087670380888}
   - component: {fileID: 8055628087670380889}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: MainMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -329,7 +329,7 @@ GameObject:
   - component: {fileID: 8055628087686750860}
   - component: {fileID: 8055628087686750850}
   - component: {fileID: 8055628087686750861}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Credits
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -403,7 +403,7 @@ GameObject:
   - component: {fileID: 8055628088088003692}
   - component: {fileID: 8055628088088003682}
   - component: {fileID: 8055628088088003693}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -479,7 +479,7 @@ GameObject:
   - component: {fileID: 8055628088384082141}
   - component: {fileID: 8055628088384082140}
   - component: {fileID: 8055628088384082143}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: ButtonStart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -607,7 +607,7 @@ GameObject:
   - component: {fileID: 8055628088487668123}
   - component: {fileID: 8055628088487668121}
   - component: {fileID: 8055628088487668120}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -648,7 +648,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8055628088487668122}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
@@ -686,7 +686,7 @@ GameObject:
   - component: {fileID: 8055628088568782612}
   - component: {fileID: 8055628088568782602}
   - component: {fileID: 8055628088568782613}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Credits
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -760,7 +760,7 @@ GameObject:
   - component: {fileID: 8055628088572183394}
   - component: {fileID: 8055628088572183392}
   - component: {fileID: 8055628088572183395}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -836,7 +836,7 @@ GameObject:
   - component: {fileID: 8055628088808535987}
   - component: {fileID: 8055628088808535986}
   - component: {fileID: 8055628088808535985}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: StartCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -954,7 +954,7 @@ GameObject:
   - component: {fileID: 8055628088874681424}
   - component: {fileID: 8055628088874681430}
   - component: {fileID: 8055628088874681425}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -995,7 +995,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8055628088874681427}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
@@ -1034,7 +1034,7 @@ GameObject:
   - component: {fileID: 8055628088883737829}
   - component: {fileID: 8055628088883737828}
   - component: {fileID: 8055628088883737831}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: ButtonQuit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1056,10 +1056,10 @@ RectTransform:
   m_Father: {fileID: 8055628088808535997}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 802.7999, y: -165.7998}
-  m_SizeDelta: {x: -1249.6, y: -880.5}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -160, y: -165.7998}
+  m_SizeDelta: {x: 670.4, y: 199.5}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &8055628088883737829
 CanvasRenderer:
@@ -1162,7 +1162,7 @@ GameObject:
   - component: {fileID: 8055628089006222256}
   - component: {fileID: 8055628089006222262}
   - component: {fileID: 8055628089006222257}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}

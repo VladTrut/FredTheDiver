@@ -237,7 +237,7 @@ MonoBehaviour:
   - name: Music01
     clip: {fileID: 8300000, guid: 5ebef0a001ab7174990deff25fdbb229, type: 3}
     source: {fileID: 0}
-    volume: 1
+    volume: 0.75
     pitch: 1
     randomVolume: 0
     randomPitch: 0

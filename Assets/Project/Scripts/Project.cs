@@ -5,7 +5,7 @@ using UnityEngine;
 public class Project : MonoBehaviour
 {
     public GameObject [] m_segmentPrefab;
-    public GameObject[] m_itemPrefab;
+    public Item[] m_itemPrefab;
     public float m_itemSpawnProbability = 0.8f;
 
     public Camera m_cam;
@@ -17,15 +17,11 @@ public class Project : MonoBehaviour
 
     private List<GameObject> m_world = new List<GameObject>();
     private GameObject m_currentSegment;
-    //private bool m_GameStarted = false;
     private Vector3 m_playerPos;
     private Quaternion m_playerRot;
     private Vector3 m_boatPos;
     private Quaternion m_boatRotation;
     private List<GameObject> m_items = new List<GameObject>();
-
-
-    //public bool GameStarted { get => m_GameStarted; set => m_GameStarted = value; }
 
     private void Awake()
     {
@@ -38,12 +34,10 @@ public class Project : MonoBehaviour
 
     private void Start()
     {
-        //GenerateFirstSegment();
     }
 
     private void FixedUpdate()
     {
-        //if (!m_GameStarted) return;
         if (m_currentSegment == null)
             return;
 
@@ -60,8 +54,6 @@ public class Project : MonoBehaviour
 
     private void Update()
     {
-        //if (!m_GameStarted) return;
-
         Vector3 camPos = m_player.transform.position - Vector3.forward * m_camDistance;
         camPos.z = Mathf.Max(camPos.z, -m_segmentSize - 2.0f);
         m_cam.transform.position = camPos;
@@ -73,8 +65,6 @@ public class Project : MonoBehaviour
 
     public void GenerateFirstSegment()
     {
-        //if (!m_GameStarted) return;
-
         if (m_segmentPrefab.Length == 0)
             return;
 
@@ -88,8 +78,6 @@ public class Project : MonoBehaviour
 
     void GenerateNextSegment()
     {
-        //if (!m_GameStarted) return;
-
         GameObject b = Instantiate(m_segmentPrefab[(int)Random.Range(1, m_segmentPrefab.Length)], Vector3.zero, Quaternion.identity);
         var pos = b.transform.position;
         pos.x += m_currentSegment.transform.position.x + m_segmentSize;
@@ -104,27 +92,42 @@ public class Project : MonoBehaviour
         if (m_itemPrefab.Length == 0)
             return;
 
+        float maxP = 0.0f;
+        foreach (var i in m_itemPrefab)
+            maxP += i.SpawnProbability;
+
         var points = level.GetComponentsInChildren<ItemSpawnPoint>();
         if(points != null)
         {
             for(int i=0; i<points.Length; i++)
             {
-                if (Random.value >= m_itemSpawnProbability)
+                float p = Random.value;
+                if (p >= m_itemSpawnProbability)
                     continue;
-
-                int index = Random.Range(0, m_itemPrefab.Length);
+                
                 points[i].transform.localRotation = Quaternion.identity;
                 points[i].transform.rotation = Quaternion.identity;
                 
-                var item = Instantiate(m_itemPrefab[index], points[i].transform);
-                m_items.Add(item);
+                m_items.Add(SpawnItem(points[i].transform, p * maxP, maxP));
             }
         }
     }
 
+    GameObject SpawnItem(Transform parent, float spawnP, float maxP)
+    {
+        float p = maxP;
+        foreach(var item in m_itemPrefab)
+        {
+            p -= item.SpawnProbability;
+            if(spawnP >= p)
+                return Instantiate(item.gameObject, parent);
+        }
+
+        return null;
+    }
+
     public void Init()
     {
-        //m_GameStarted = true;
         m_player.transform.position = m_playerPos;
         m_player.transform.rotation = m_playerRot;
         m_boat.transform.position = m_boatPos;
@@ -138,7 +141,6 @@ public class Project : MonoBehaviour
     public void GameOver()
     {
         enabled = false;
-        //m_GameStarted = false;
         m_player.transform.position = m_playerPos;
         m_player.transform.rotation = m_playerRot;
         m_boat.transform.position = m_boatPos;
