@@ -528,6 +528,46 @@ PrefabInstance:
       propertyPath: m_boat
       value: 
       objectReference: {fileID: 1708790219}
+    - target: {fileID: 2697512558375724347, guid: 899659b4b06d6a747873c54cde5c1620,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.28177166
+      objectReference: {fileID: 0}
+    - target: {fileID: 2697512558375724347, guid: 899659b4b06d6a747873c54cde5c1620,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.5980717
+      objectReference: {fileID: 0}
+    - target: {fileID: 2697512558375724347, guid: 899659b4b06d6a747873c54cde5c1620,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.23668937
+      objectReference: {fileID: 0}
+    - target: {fileID: 2697512558375724347, guid: 899659b4b06d6a747873c54cde5c1620,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.71196425
+      objectReference: {fileID: 0}
+    - target: {fileID: 2697512558375724347, guid: 899659b4b06d6a747873c54cde5c1620,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 183.11087
+      objectReference: {fileID: 0}
+    - target: {fileID: 2697512558375724347, guid: 899659b4b06d6a747873c54cde5c1620,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -156.65039
+      objectReference: {fileID: 0}
+    - target: {fileID: 2697512558375724347, guid: 899659b4b06d6a747873c54cde5c1620,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -62.880142
+      objectReference: {fileID: 0}
+    - target: {fileID: 2697512558375724324, guid: 899659b4b06d6a747873c54cde5c1620,
+        type: 3}
+      propertyPath: m_TargetTexture
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 899659b4b06d6a747873c54cde5c1620, type: 3}
 --- !u!114 &2697512558454366650 stripped

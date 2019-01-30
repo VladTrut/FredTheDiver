@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     public static Player instance;
 
     public float m_speed = 10.0f;
+    public float m_zOrigin = -43.0f;
 
     private Rigidbody m_body;
     private Vector3 m_force;
@@ -108,10 +109,13 @@ public class Player : MonoBehaviour
         }
 
         float weightCoeff = (m_FullChargeSpeedCoeff - 1f)/m_itemsMaxWeight * m_itemsWeight + 1f;
-
-        //m_body.AddForce(f, ForceMode.Impulse);
+        
         m_body.AddForceAtPosition(f, head, ForceMode.Impulse);
         m_body.AddForce(m_force * weightCoeff, ForceMode.Impulse);
+
+        // keep player on path
+        float offset = m_body.transform.position.z - m_zOrigin;
+        m_body.AddForce(-Vector3.forward * offset, ForceMode.Impulse);
 
         float targetDir = Vector3.Dot(Vector3.right, f.normalized);
 
@@ -125,7 +129,7 @@ public class Player : MonoBehaviour
                     m_body.AddTorque(Vector3.forward * alpha2 * 1f * Time.fixedDeltaTime * (isUp ? 1f : -1f) , ForceMode.Force);
                 else if(m_direction == -1)
                     m_body.AddTorque(Vector3.forward * alpha2 * 1f * Time.fixedDeltaTime * (isUp ? -1f : 1f) , ForceMode.Force);
-            }
+            } 
         }
         // right
         else if (targetDir > 1e-2f || (targetDir >= -1e-2f && m_direction == 1))
@@ -153,7 +157,6 @@ public class Player : MonoBehaviour
             bool isUp = Vector3.Dot(-m_body.transform.forward, f) >= 0.0f;
             m_body.AddTorque(Vector3.forward * alpha2 * 0.75f * Time.fixedDeltaTime * (isUp ? -1f : 1f), ForceMode.Force);
         }
-
 
         float speed = m_body.velocity.magnitude;
         float speed2 = speed * speed;

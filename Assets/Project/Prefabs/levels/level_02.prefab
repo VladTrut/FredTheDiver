@@ -21473,7 +21473,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5124779862418886017
 Transform:
   m_ObjectHideFlags: 0
@@ -47887,7 +47887,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7565657647725465864
 Transform:
   m_ObjectHideFlags: 0
@@ -53840,10 +53840,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1485160846728350256}
     m_Modifications:
-    - target: {fileID: 100002, guid: 95ea6b1708ca94f4481b033fef0a2384, type: 3}
-      propertyPath: m_Name
-      value: seetang_leuchtend
-      objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 95ea6b1708ca94f4481b033fef0a2384, type: 3}
       propertyPath: m_LocalPosition.x
       value: 18
@@ -53899,6 +53895,10 @@ PrefabInstance:
     - target: {fileID: 400002, guid: 95ea6b1708ca94f4481b033fef0a2384, type: 3}
       propertyPath: m_LocalScale.z
       value: 0.61677
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 95ea6b1708ca94f4481b033fef0a2384, type: 3}
+      propertyPath: m_Name
+      value: seetang_leuchtend
       objectReference: {fileID: 0}
     - target: {fileID: 2300008, guid: 95ea6b1708ca94f4481b033fef0a2384, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -54227,10 +54227,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1485160846728350256}
     m_Modifications:
-    - target: {fileID: 100002, guid: 95ea6b1708ca94f4481b033fef0a2384, type: 3}
-      propertyPath: m_Name
-      value: seetang_leuchtend (1)
-      objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 95ea6b1708ca94f4481b033fef0a2384, type: 3}
       propertyPath: m_LocalPosition.x
       value: 21.81
@@ -54287,6 +54283,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.61676997
       objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 95ea6b1708ca94f4481b033fef0a2384, type: 3}
+      propertyPath: m_Name
+      value: seetang_leuchtend (1)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 95ea6b1708ca94f4481b033fef0a2384, type: 3}
 --- !u!4 &5401686651378040707 stripped
@@ -54302,10 +54302,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1485160846728350256}
     m_Modifications:
-    - target: {fileID: 100002, guid: 95ea6b1708ca94f4481b033fef0a2384, type: 3}
-      propertyPath: m_Name
-      value: seetang_leuchtend (2)
-      objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 95ea6b1708ca94f4481b033fef0a2384, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6.59
@@ -54361,6 +54357,10 @@ PrefabInstance:
     - target: {fileID: 400002, guid: 95ea6b1708ca94f4481b033fef0a2384, type: 3}
       propertyPath: m_LocalScale.z
       value: 0.5268696
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 95ea6b1708ca94f4481b033fef0a2384, type: 3}
+      propertyPath: m_Name
+      value: seetang_leuchtend (2)
       objectReference: {fileID: 0}
     - target: {fileID: 2300008, guid: 95ea6b1708ca94f4481b033fef0a2384, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -55122,15 +55122,15 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2300004, guid: 1c6111cf40550464c9284ae9814099d3, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 4518a363527b2224ca7648f90f3b132f, type: 2}
     - target: {fileID: 2300002, guid: 1c6111cf40550464c9284ae9814099d3, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 4518a363527b2224ca7648f90f3b132f, type: 2}
     - target: {fileID: 2300000, guid: 1c6111cf40550464c9284ae9814099d3, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4518a363527b2224ca7648f90f3b132f, type: 2}
+    - target: {fileID: 2300004, guid: 1c6111cf40550464c9284ae9814099d3, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 4518a363527b2224ca7648f90f3b132f, type: 2}
@@ -55597,10 +55597,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1485160846728350256}
     m_Modifications:
-    - target: {fileID: 100002, guid: 95ea6b1708ca94f4481b033fef0a2384, type: 3}
-      propertyPath: m_Name
-      value: seetang_leuchtend (3)
-      objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 95ea6b1708ca94f4481b033fef0a2384, type: 3}
       propertyPath: m_LocalPosition.x
       value: -15.35
@@ -55657,6 +55653,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.31979007
       objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 95ea6b1708ca94f4481b033fef0a2384, type: 3}
+      propertyPath: m_Name
+      value: seetang_leuchtend (3)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 95ea6b1708ca94f4481b033fef0a2384, type: 3}
 --- !u!4 &9164683287919879151 stripped
@@ -55672,10 +55672,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1485160846728350256}
     m_Modifications:
-    - target: {fileID: 100002, guid: 95ea6b1708ca94f4481b033fef0a2384, type: 3}
-      propertyPath: m_Name
-      value: seetang_leuchtend (4)
-      objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 95ea6b1708ca94f4481b033fef0a2384, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.19
@@ -55731,6 +55727,10 @@ PrefabInstance:
     - target: {fileID: 400002, guid: 95ea6b1708ca94f4481b033fef0a2384, type: 3}
       propertyPath: m_LocalScale.z
       value: 0.31979
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 95ea6b1708ca94f4481b033fef0a2384, type: 3}
+      propertyPath: m_Name
+      value: seetang_leuchtend (4)
       objectReference: {fileID: 0}
     - target: {fileID: 2300008, guid: 95ea6b1708ca94f4481b033fef0a2384, type: 3}
       propertyPath: m_Materials.Array.data[0]

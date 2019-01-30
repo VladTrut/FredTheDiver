@@ -1200,6 +1200,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_speed: 10
+  m_zOrigin: -43
   m_FullChargeSpeedCoeff: 0.6
 --- !u!114 &293305257
 MonoBehaviour:
@@ -1329,14 +1330,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1725988636}
     m_Modifications:
-    - target: {fileID: 1302045184681056, guid: d7689380619fd894c8508730e2bed11f, type: 3}
-      propertyPath: m_Name
-      value: Particle jiggly bubble soapy cubemap
-      objectReference: {fileID: 0}
-    - target: {fileID: 1302045184681056, guid: d7689380619fd894c8508730e2bed11f, type: 3}
-      propertyPath: m_Layer
-      value: 13
-      objectReference: {fileID: 0}
     - target: {fileID: 4891049361556014, guid: d7689380619fd894c8508730e2bed11f, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.62
@@ -1380,6 +1373,14 @@ PrefabInstance:
     - target: {fileID: 4891049361556014, guid: d7689380619fd894c8508730e2bed11f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1302045184681056, guid: d7689380619fd894c8508730e2bed11f, type: 3}
+      propertyPath: m_Name
+      value: Particle jiggly bubble soapy cubemap
+      objectReference: {fileID: 0}
+    - target: {fileID: 1302045184681056, guid: d7689380619fd894c8508730e2bed11f, type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 1605685637523396, guid: d7689380619fd894c8508730e2bed11f, type: 3}
       propertyPath: m_Layer
