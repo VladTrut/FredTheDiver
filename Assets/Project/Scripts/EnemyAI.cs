@@ -59,8 +59,8 @@ public class EnemyAI : MonoBehaviour
     /* ---- MODE PATROL ---- */
 
     public Transform[] m_PatrolPoints;
-    [SerializeField] private int m_LastPatrolIndex = 0;
-    [SerializeField] private int m_PatrolPointIndex = 0;
+    private int m_LastPatrolIndex = 0;
+    private int m_PatrolPointIndex = 0;
     public bool m_Randomize;
     private int[] m_validChoices;
     [SerializeField] private float m_Speed;

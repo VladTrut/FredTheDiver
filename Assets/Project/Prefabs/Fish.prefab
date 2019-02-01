@@ -83,24 +83,19 @@ MonoBehaviour:
     targettransform: {fileID: 0}
     targetpriority: 0
   m_TargetsArray:
-  - targetname: Player
-    targettag: Player
-    priority: 2
-  - targetname: Fred_prefab
+  - targetname: 
     targettag: Player
     priority: 2
   m_WhatIsTarget:
     serializedVersion: 2
-    m_Bits: 2048
+    m_Bits: 10240
   m_GiveUpDistance: 10
   m_Detection: {fileID: 7430425718243804862}
   m_PatrolPoints:
   - {fileID: 7430425719554841700}
   - {fileID: 7430425718440738601}
-  m_LastPatrolIndex: 0
-  m_PatrolPointIndex: 0
   m_Randomize: 0
-  m_Speed: 1.8
+  m_Speed: 1.5
   m_PointReachDist: 4
   m_ApplyForceDelay: 0.1
   m_DamageDelay: 1
@@ -160,7 +155,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 7.42
+  m_Radius: 2.7166183
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7430425718440738602
 GameObject:

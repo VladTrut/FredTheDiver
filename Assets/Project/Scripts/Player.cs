@@ -31,7 +31,7 @@ public class Player : MonoBehaviour
     public Vector3 HeadPosition { get => m_body.transform.position + m_body.transform.up; }
     private bool m_IsDropping;
     [SerializeField] private float m_DropDelay;
-    [SerializeField] private float m_FullChargeSpeedCoeff = 0.25f;
+    [Range (0.6f, 1f)][SerializeField] private float m_FullChargeSpeedCoeff = 0.25f;
     private string m_DroppedItemsStr = "DroppedItems";
 
     private void Awake()
