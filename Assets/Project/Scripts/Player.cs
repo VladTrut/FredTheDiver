@@ -6,7 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class Player : MonoBehaviour
 {
-    public enum PlayerState {  LandIdle, UnderwaterIdle, UnderwaterSwim }
+    public enum PlayerState { LandIdle, UnderwaterIdle, UnderwaterSwim }
     public static Player instance;
 
     public float m_speed = 10.0f;
@@ -29,8 +29,10 @@ public class Player : MonoBehaviour
     private OxygenMgt m_oxygenManager;
     public Vector3 BodyPosition { get => m_body.transform.position; }
     public Vector3 HeadPosition { get => m_body.transform.position + m_body.transform.up; }
-
+    private bool m_IsDropping;
+    [SerializeField] private float m_DropDelay;
     [SerializeField] private float m_FullChargeSpeedCoeff = 0.25f;
+    private string m_DroppedItemsStr = "DroppedItems";
 
     private void Awake()
     {
@@ -74,18 +76,21 @@ public class Player : MonoBehaviour
                 f -= step * Vector3.left * Time.fixedDeltaTime;
                 isMoving = true;
             }
-            if(Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
+            if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
             {
                 // TODO Boost
             }
-            if(Input.GetKey(KeyCode.Space))
+            if (Input.GetKey(KeyCode.Space))
             {
-                // TODO Drop some items
+                if (!m_IsDropping && m_items.Count > 0)
+                    StartCoroutine(Drop());
+
+                // TODO UI so that the players knows that space = drop
             }
         }
 
         // TODO Smooth transition between states
-        if(isMoving)
+        if (isMoving)
         {
             SwitchState(PlayerState.UnderwaterSwim);
         }
@@ -93,14 +98,14 @@ public class Player : MonoBehaviour
         {
             SwitchState(PlayerState.UnderwaterIdle);
         }
-        
-        if(f.y > 0f)
+
+        if (f.y > 0f)
             f.y = Mathf.Min(f.y, 0.05f);
-        if(f.x > 0f)
+        if (f.x > 0f)
             f.x = Mathf.Min(f.x, 0.025f);
         else if (f.x < 0f)
             f.x = Mathf.Max(f.x, -0.025f);
- 
+
         Vector3 head = m_body.position + m_body.transform.up;
         if (head.y >= 0)
         {
@@ -108,8 +113,8 @@ public class Player : MonoBehaviour
                 f.y *= -1.0f;
         }
 
-        float weightCoeff = (m_FullChargeSpeedCoeff - 1f)/m_itemsMaxWeight * m_itemsWeight + 1f;
-        
+        float weightCoeff = (m_FullChargeSpeedCoeff - 1f) / m_itemsMaxWeight * m_itemsWeight + 1f;
+
         m_body.AddForceAtPosition(f, head, ForceMode.Impulse);
         m_body.AddForce(m_force * weightCoeff, ForceMode.Impulse);
 
@@ -119,17 +124,17 @@ public class Player : MonoBehaviour
 
         float targetDir = Vector3.Dot(Vector3.right, f.normalized);
 
-        if(!isMoving)
+        if (!isMoving)
         {
             float alpha2 = Vector3.Angle(m_body.transform.up, Vector3.up);
             bool isUp = Vector3.Dot(-m_body.transform.forward, Vector3.up) >= 0.0f;
             if (isUp)
             {
-                if(m_direction == 1)
-                    m_body.AddTorque(Vector3.forward * alpha2 * 1f * Time.fixedDeltaTime * (isUp ? 1f : -1f) , ForceMode.Force);
-                else if(m_direction == -1)
-                    m_body.AddTorque(Vector3.forward * alpha2 * 1f * Time.fixedDeltaTime * (isUp ? -1f : 1f) , ForceMode.Force);
-            } 
+                if (m_direction == 1)
+                    m_body.AddTorque(Vector3.forward * alpha2 * 1f * Time.fixedDeltaTime * (isUp ? 1f : -1f), ForceMode.Force);
+                else if (m_direction == -1)
+                    m_body.AddTorque(Vector3.forward * alpha2 * 1f * Time.fixedDeltaTime * (isUp ? -1f : 1f), ForceMode.Force);
+            }
         }
         // right
         else if (targetDir > 1e-2f || (targetDir >= -1e-2f && m_direction == 1))
@@ -142,10 +147,10 @@ public class Player : MonoBehaviour
 
             alpha2 = Vector3.Angle(m_body.transform.up, f);
             bool isUp = Vector3.Dot(-m_body.transform.forward, f) >= 0.0f;
-            m_body.AddTorque(Vector3.forward * alpha2 * 0.75f * Time.fixedDeltaTime * (isUp ? 1f : -1f), ForceMode.Force);            
+            m_body.AddTorque(Vector3.forward * alpha2 * 0.75f * Time.fixedDeltaTime * (isUp ? 1f : -1f), ForceMode.Force);
         }
         // left
-        else if(targetDir < -1e-2f || (targetDir <= 1e-2f && m_direction == -1))
+        else if (targetDir < -1e-2f || (targetDir <= 1e-2f && m_direction == -1))
         {
             m_direction = -1;
             float alpha2 = Vector3.Angle(Vector3.left, m_body.transform.forward);
@@ -162,7 +167,7 @@ public class Player : MonoBehaviour
         float speed2 = speed * speed;
         m_body.AddForce(-m_body.velocity.normalized * speed2 * 0.25f * Time.fixedDeltaTime, ForceMode.Impulse);
 
-        m_force -= Vector3.one * Time.fixedDeltaTime; 
+        m_force -= Vector3.one * Time.fixedDeltaTime;
         m_force.x = Mathf.Max(0f, m_force.x);
         m_force.y = Mathf.Max(0f, m_force.y);
         m_force.z = Mathf.Max(0f, m_force.z);
@@ -204,7 +209,7 @@ public class Player : MonoBehaviour
     public bool Collect(Item item)
     {
         float w = m_itemsWeight + item.Weight;
-        if (w > m_itemsMaxWeight)
+        if (w > m_itemsMaxWeight || m_IsDropping)
             return false;
 
         m_items.Add(item);
@@ -234,6 +239,38 @@ public class Player : MonoBehaviour
         m_items.Clear();
         m_itemsWeight = 0.0f;
         m_itemsValue = 0.0f;
+    }
+
+    private IEnumerator Drop()
+    {
+        m_IsDropping = true;
+
+        int itemNumber = m_items.Count;
+        if (itemNumber > 0)
+        {
+            Item lastItem = m_items[itemNumber - 1];
+            Project project = FindObjectOfType<Project>();
+            if (project != null)
+            {
+                GameObject droppedItem = project.GetComponent<Project>().InstantiateItem(lastItem.Type, transform.position);
+                droppedItem.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionZ;
+                if (droppedItem != null)
+                {
+                    GameObject droppeditems = GameObject.Find(m_DroppedItemsStr);
+                    if (droppeditems != null)
+                        droppedItem.transform.parent = droppeditems.transform;
+                }
+
+                m_itemsWeight -= lastItem.Weight;
+                m_itemsValue -= lastItem.Value;
+                InventoryMgt.instance.DecreaseItemType(lastItem.Type, (int)lastItem.Weight);
+                m_items.RemoveAt(itemNumber - 1);
+            }
+        }
+
+        yield return new WaitForSeconds(m_DropDelay);
+
+        m_IsDropping = false;
     }
 }
 

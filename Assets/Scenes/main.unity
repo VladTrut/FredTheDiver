@@ -14,7 +14,7 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
-  m_Fog: 1
+  m_Fog: 0
   m_FogColor: {r: 0.2721609, g: 0.39562857, b: 0.41509432, a: 1}
   m_FogMode: 3
   m_FogDensity: 0.07
@@ -439,6 +439,36 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7377d6ec6592694285bdb5b763a8e8e, type: 3}
+--- !u!1 &1411561724
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1411561725}
+  m_Layer: 0
+  m_Name: DroppedItems
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1411561725
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1411561724}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -20.690205, y: -21.991089, z: -43}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1708790219 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2675411604526095957, guid: fdf394d74561d934b82ab4dcf6228633,
@@ -528,46 +558,6 @@ PrefabInstance:
       propertyPath: m_boat
       value: 
       objectReference: {fileID: 1708790219}
-    - target: {fileID: 2697512558375724347, guid: 899659b4b06d6a747873c54cde5c1620,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.28177166
-      objectReference: {fileID: 0}
-    - target: {fileID: 2697512558375724347, guid: 899659b4b06d6a747873c54cde5c1620,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.5980717
-      objectReference: {fileID: 0}
-    - target: {fileID: 2697512558375724347, guid: 899659b4b06d6a747873c54cde5c1620,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.23668937
-      objectReference: {fileID: 0}
-    - target: {fileID: 2697512558375724347, guid: 899659b4b06d6a747873c54cde5c1620,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: -0.71196425
-      objectReference: {fileID: 0}
-    - target: {fileID: 2697512558375724347, guid: 899659b4b06d6a747873c54cde5c1620,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 183.11087
-      objectReference: {fileID: 0}
-    - target: {fileID: 2697512558375724347, guid: 899659b4b06d6a747873c54cde5c1620,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -156.65039
-      objectReference: {fileID: 0}
-    - target: {fileID: 2697512558375724347, guid: 899659b4b06d6a747873c54cde5c1620,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -62.880142
-      objectReference: {fileID: 0}
-    - target: {fileID: 2697512558375724324, guid: 899659b4b06d6a747873c54cde5c1620,
-        type: 3}
-      propertyPath: m_TargetTexture
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 899659b4b06d6a747873c54cde5c1620, type: 3}
 --- !u!114 &2697512558454366650 stripped

@@ -30,7 +30,6 @@ public class EnemyAI : MonoBehaviour
     [System.Serializable]
     public class TargetData
     {
-        public string targetname;
         public string targettag;
         public int priority;
     };

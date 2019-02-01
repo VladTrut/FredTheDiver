@@ -40,7 +40,7 @@ public class Item : MonoBehaviour
         }
 
         m_isCollected = true;
-        gameObject.SetActive(false);
+        Destroy(gameObject);
 
         if (m_type == InventoryMgt.ItemType.COIN)
             AudioManager.instance.PlaySound("ItemCoin");
@@ -51,4 +51,9 @@ public class Item : MonoBehaviour
 
         // TODO animation
     }
+
+
+
+
+
 }

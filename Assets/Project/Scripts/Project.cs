@@ -157,4 +157,10 @@ public class Project : MonoBehaviour
         AudioManager.instance.StopSound("PlayerBreathUnderWater");
         AudioManager.instance.StopSound("PlayerHeartBeat");
     }
+
+    public GameObject InstantiateItem(InventoryMgt.ItemType type, Vector3 pos)
+    {
+        return Instantiate(m_itemPrefab[(int)type].gameObject, pos, Quaternion.identity);
+    }
+
 }

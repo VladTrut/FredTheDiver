@@ -20,7 +20,7 @@ public class EnemyDetection : MonoBehaviour
             {
                 for (int i = 0; i < m_EnemyAI.m_TargetsArray.Length; i++)
                 {
-                    if (other.tag == m_EnemyAI.m_TargetsArray[i].targettag && other.name == m_EnemyAI.m_TargetsArray[i].targetname)
+                    if (other.tag == m_EnemyAI.m_TargetsArray[i].targettag)
                     {
                         bool hit = Physics.Raycast(this.transform.position, other.gameObject.transform.position - this.transform.position, 50f, m_EnemyAI.m_WhatIsTarget);
 
@@ -42,7 +42,7 @@ public class EnemyDetection : MonoBehaviour
             {
                 for (int i = 0; i < m_EnemyAI.m_TargetsArray.Length; i++)
                 {
-                    if (other.tag == m_EnemyAI.m_TargetsArray[i].targettag && other.name == m_EnemyAI.m_TargetsArray[i].targetname)
+                    if (other.tag == m_EnemyAI.m_TargetsArray[i].targettag)
                     {
                         bool hit = Physics.Raycast(this.transform.position, other.gameObject.transform.position - this.transform.position, Mathf.Infinity, m_EnemyAI.m_WhatIsTarget);
 

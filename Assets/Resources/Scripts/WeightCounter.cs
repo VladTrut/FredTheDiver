@@ -33,6 +33,11 @@ public class WeightCounter : MonoBehaviour
         m_Weight += value;
     }
 
+    public void DecreaseWeight(int value)
+    {
+        m_Weight -= value;
+    }
+
     public void ResetWeight()
     {
         m_Weight = 0;
