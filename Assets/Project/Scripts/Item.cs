@@ -14,7 +14,6 @@ public class Item : MonoBehaviour
     public InventoryMgt.ItemType Type { get => m_type; }
     public float SpawnProbability { get => m_spawnProbability; }
 
-    private bool m_isCollected = false;
     private bool m_isCollecting = false;
 
     private void OnTriggerStay(Collider other)
@@ -39,8 +38,7 @@ public class Item : MonoBehaviour
             yield break;
         }
 
-        m_isCollected = true;
-        Destroy(gameObject);
+        m_isCollecting = false;
 
         if (m_type == InventoryMgt.ItemType.COIN)
             AudioManager.instance.PlaySound("ItemCoin");
@@ -50,10 +48,7 @@ public class Item : MonoBehaviour
             AudioManager.instance.PlaySound("ItemChest");
 
         // TODO animation
+
+        gameObject.SetActive(false);
     }
-
-
-
-
-
 }

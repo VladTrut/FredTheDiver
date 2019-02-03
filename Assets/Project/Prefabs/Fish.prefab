@@ -78,13 +78,12 @@ MonoBehaviour:
   DebugMode: 0
   m_State: 0
   m_ModeEnabled: 
-  m_Damage: 10
+  m_Damage: 25
   m_Target:
     targettransform: {fileID: 0}
     targetpriority: 0
   m_TargetsArray:
-  - targetname: 
-    targettag: Player
+  - targettag: Player
     priority: 2
   m_WhatIsTarget:
     serializedVersion: 2

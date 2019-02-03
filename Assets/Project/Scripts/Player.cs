@@ -11,9 +11,13 @@ public class Player : MonoBehaviour
 
     public float m_speed = 10.0f;
     public float m_zOrigin = -43.0f;
+    public float m_boostAmount = 150.0f;
+    public int m_boostOxygen = 10;
+    public float m_dropBoostAmount = 100.0f;    
 
     private Rigidbody m_body;
     private Vector3 m_force;
+    private Vector3 m_boost;
     private Animator m_animator;
 
     private string m_animUnderwaterIdle = "Underwater-Idle";
@@ -31,6 +35,7 @@ public class Player : MonoBehaviour
     public Vector3 HeadPosition { get => m_body.transform.position + m_body.transform.up; }
     private bool m_IsDropping;
     [SerializeField] private float m_DropDelay;
+    [SerializeField] private int m_DropAmount;
     [Range (0.6f, 1f)][SerializeField] private float m_FullChargeSpeedCoeff = 0.25f;
     private string m_DroppedItemsStr = "DroppedItems";
 
@@ -53,6 +58,8 @@ public class Player : MonoBehaviour
         float step = m_speed;
         bool isMoving = false;
         bool isPlayerDead = OxygenMgt.instance.CurrentOxygen <= 0;
+        Vector3 head = m_body.position + m_body.transform.up;
+
 
         if (!isPlayerDead)
         {
@@ -78,7 +85,14 @@ public class Player : MonoBehaviour
             }
             if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
             {
-                // TODO Boost
+                if (head.y < -1f)
+                {
+                    if (m_oxygenManager.CurrentOxygen > m_boostOxygen && m_boost.sqrMagnitude <= 1e-4)
+                    {
+                        AddBoost(m_boostAmount);
+                        m_oxygenManager.DecreaseOxygen(m_boostOxygen);
+                    }
+                }
             }
             if (Input.GetKey(KeyCode.Space))
             {
@@ -106,17 +120,22 @@ public class Player : MonoBehaviour
         else if (f.x < 0f)
             f.x = Mathf.Max(f.x, -0.025f);
 
-        Vector3 head = m_body.position + m_body.transform.up;
         if (head.y >= 0)
         {
             if (f.y > 0f)
                 f.y *= -1.0f;
         }
 
-        float weightCoeff = (m_FullChargeSpeedCoeff - 1f) / m_itemsMaxWeight * m_itemsWeight + 1f;
-
         m_body.AddForceAtPosition(f, head, ForceMode.Impulse);
-        m_body.AddForce(m_force * weightCoeff, ForceMode.Impulse);
+
+        float weightCoeff = (m_FullChargeSpeedCoeff - 1f) / m_itemsMaxWeight * m_itemsWeight + 1f;        
+        if (head.y < 0)
+            m_body.AddForce(m_force * weightCoeff, ForceMode.Impulse);
+
+        // Boost
+        if (m_body.position.y < 0)
+            m_body.AddForce(m_boost, ForceMode.Impulse);
+        m_boost *= 0.9f;
 
         // keep player on path
         float offset = m_body.transform.position.z - m_zOrigin;
@@ -136,7 +155,7 @@ public class Player : MonoBehaviour
                     m_body.AddTorque(Vector3.forward * alpha2 * 1f * Time.fixedDeltaTime * (isUp ? -1f : 1f), ForceMode.Force);
             }
         }
-        // right
+        // right turn
         else if (targetDir > 1e-2f || (targetDir >= -1e-2f && m_direction == 1))
         {
             m_direction = 1;
@@ -149,7 +168,7 @@ public class Player : MonoBehaviour
             bool isUp = Vector3.Dot(-m_body.transform.forward, f) >= 0.0f;
             m_body.AddTorque(Vector3.forward * alpha2 * 0.75f * Time.fixedDeltaTime * (isUp ? 1f : -1f), ForceMode.Force);
         }
-        // left
+        // left turn
         else if (targetDir < -1e-2f || (targetDir <= 1e-2f && m_direction == -1))
         {
             m_direction = -1;
@@ -163,19 +182,23 @@ public class Player : MonoBehaviour
             m_body.AddTorque(Vector3.forward * alpha2 * 0.75f * Time.fixedDeltaTime * (isUp ? -1f : 1f), ForceMode.Force);
         }
 
+        // resistance force
         float speed = m_body.velocity.magnitude;
         float speed2 = speed * speed;
         m_body.AddForce(-m_body.velocity.normalized * speed2 * 0.25f * Time.fixedDeltaTime, ForceMode.Impulse);
-
-        m_force -= Vector3.one * Time.fixedDeltaTime;
-        m_force.x = Mathf.Max(0f, m_force.x);
-        m_force.y = Mathf.Max(0f, m_force.y);
-        m_force.z = Mathf.Max(0f, m_force.z);
     }
 
     public void ApplyForce(Vector3 f)
     {
         m_force = f;
+    }
+
+    public void AddBoost(float amount)
+    {
+        Vector3 boost = m_body.transform.up;
+        boost.z = 0.0f;
+        boost.Normalize();
+        m_boost += boost * Time.fixedDeltaTime * amount;
     }
 
     public void SwitchState(PlayerState state)
@@ -235,7 +258,7 @@ public class Player : MonoBehaviour
     public void Reset()
     {
         InventoryMgt.instance.Reset();
-        OxygenMgt.instance.Reset();
+        m_oxygenManager.Reset();
         m_items.Clear();
         m_itemsWeight = 0.0f;
         m_itemsValue = 0.0f;
@@ -245,6 +268,29 @@ public class Player : MonoBehaviour
     {
         m_IsDropping = true;
 
+        int itemsToDrop = m_DropAmount;
+        while(itemsToDrop > 0 && m_items.Count > 0)
+        {
+            itemsToDrop--;
+            Item lastItem = m_items[m_items.Count - 1];            
+
+            m_itemsWeight -= lastItem.Weight;
+            m_itemsValue -= lastItem.Value;
+            InventoryMgt.instance.DecreaseItemType(lastItem.Type, (int)lastItem.Weight);
+            m_items.RemoveAt(m_items.Count - 1);
+
+            lastItem.gameObject.SetActive(true);
+            // TODO randomize position, so that the item doesn't collide with the player?
+            lastItem.transform.position = transform.position;
+            GameObject droppeditems = GameObject.Find(m_DroppedItemsStr);
+            if (droppeditems != null)
+                lastItem.transform.parent = droppeditems.transform;
+
+            AddBoost(m_dropBoostAmount);
+
+            yield return new WaitForSeconds(0.15f);             
+        }
+        /*
         int itemNumber = m_items.Count;
         if (itemNumber > 0)
         {
@@ -267,7 +313,7 @@ public class Player : MonoBehaviour
                 m_items.RemoveAt(itemNumber - 1);
             }
         }
-
+        */
         yield return new WaitForSeconds(m_DropDelay);
 
         m_IsDropping = false;
